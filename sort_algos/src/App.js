@@ -3,7 +3,10 @@ import "./App.css";
 import styled from "styled-components";
 
 const StyledApp = styled.div`
+  
+  .bubble{
   display: flex;
+  }
 `;
 
 class App extends React.Component {
@@ -16,6 +19,7 @@ class App extends React.Component {
   render() {
     return (
       <StyledApp>
+        <div className="bubble">
         {this.state.bubble.map(num => (
           <div
             style={{
@@ -25,6 +29,7 @@ class App extends React.Component {
             }}
           />
         ))}
+        </div>
       </StyledApp>
     );
   }
