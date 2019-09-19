@@ -4,12 +4,13 @@ import styled from "styled-components";
 
 const StyledApp = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
 
-  .bubble{
-  display: flex;
+  .bubble {
+    display: flex;
   }
 `;
 
@@ -17,22 +18,38 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bubble: [2, 5, 8, 3, 1, 4, 6, 9, 7, 10]
+      bubble: [2, 5, 8, 3, 1, 4, 6, 9, 7, 10, 25, 15, 12, 11, 22, 13, 24, 17]
     };
   }
+
+  sort = () => {
+    var sorted = false;
+    while (!sorted) {
+      sorted = true;
+      this.state.bubble.forEach(function(element, index, array) {
+        if (element > array[index + 1]) {
+          array[index] = array[index + 1];
+          array[index + 1] = element;
+          sorted = false;
+          this.setState({});
+        }
+      });
+    }
+  };
+
   render() {
     return (
       <StyledApp>
         <div className="bubble">
-        {this.state.bubble.map(num => (
-          <div
-            style={{
-              width: "1rem",
-              height: `${num}rem`,
-              backgroundColor: "black"
-            }}
-          />
-        ))}
+          {this.state.bubble.map(num => (
+            <div
+              style={{
+                width: "1rem",
+                height: `${num}rem`,
+                backgroundColor: "black"
+              }}
+            />
+          ))}
         </div>
 
         <button onClick={this.sort}>Sort</button>
