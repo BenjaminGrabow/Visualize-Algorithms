@@ -12,6 +12,10 @@ const StyledApp = styled.div`
   .bubble {
     display: flex;
   }
+
+  .beam {
+    margin: 1rem;
+  }
 `;
 
 class App extends React.Component {
@@ -26,23 +30,29 @@ class App extends React.Component {
     var sorted = false;
     while (!sorted) {
       sorted = true;
-      this.state.bubble.forEach(function(element, index, array) {
+      this.state.bubble.forEach((element, index, array) => {
         if (element > array[index + 1]) {
           array[index] = array[index + 1];
           array[index + 1] = element;
           sorted = false;
-          this.setState({});
+          this.setState({
+            bubble: array
+          });
         }
       });
     }
+
+    // setInterval(() => {
+    // }, 500);
   };
 
   render() {
     return (
       <StyledApp>
         <div className="bubble">
-          {this.state.bubble.map(num => (
-            <div
+          {this.state.bubble.map((num, index) => (
+            <div key={index}
+              className="beam"
               style={{
                 width: "1rem",
                 height: `${num}rem`,
