@@ -7,7 +7,7 @@ const StyledApp = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  
+
   .bubble{
   display: flex;
   }
@@ -34,6 +34,8 @@ class App extends React.Component {
           />
         ))}
         </div>
+
+        <button onClick={this.sort}>Sort</button>
       </StyledApp>
     );
   }
