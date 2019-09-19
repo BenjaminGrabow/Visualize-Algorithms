@@ -3,7 +3,7 @@ import './App.css';
 import styled from "styled-components";
 
 const StyledApp = styled.div`
-
+display: flex;
 `;
 
 class App extends React.Component {
@@ -15,7 +15,7 @@ class App extends React.Component {
   }
   render() { 
     return ( <StyledApp>
-
+    {this.state.bubble.map(num => <div style={{width: "1rem", height: `${num}rem`, backgroundColor: "black"}}/>)}
     </StyledApp>
      );
   }
