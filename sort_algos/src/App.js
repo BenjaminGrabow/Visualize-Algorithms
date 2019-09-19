@@ -27,24 +27,46 @@ class App extends React.Component {
   }
 
   sort = () => {
-    var sorted = false;
-    while (!sorted) {
-      sorted = true;
-      this.state.bubble.forEach((element, index, array) => {
-        if (element > array[index + 1]) {
-          array[index] = array[index + 1];
-          array[index + 1] = element;
-          sorted = false;
-          this.setState({
-            bubble: array
-          });
-        }
-      });
-    }
 
-    // setInterval(() => {
-    // }, 500);
-  };
+    // var sorted = false;
+    // while (!sorted) {
+    //   sorted = true;
+    //   this.state.bubble.forEach((element, index, array) => {
+    //     if (element > array[index + 1]) {
+    //       // setInterval(() => {0
+    //       array[index] = array[index + 1];
+    //       array[index + 1] = element;
+    //       // }, 100);
+          
+    //       // setInterval(() => sorted = false, 100)
+    //     }
+    //   });
+    // }
+    
+    let arr = [...this.state.bubble];
+    
+        for(let j=0;j<arr.length;j++) {
+            for(let i = 0; i < arr.length; i++) {
+                if(arr[i]>arr[i+1]) {
+                    var temp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = temp;
+this.changeState(arr);
+break;
+                  }
+            
+                  }
+              }      
+            
+          };
+          
+          changeState = (array) => {
+            this.setState({
+              bubble: array
+    });
+
+    this.sort();
+  }
 
   render() {
     return (
