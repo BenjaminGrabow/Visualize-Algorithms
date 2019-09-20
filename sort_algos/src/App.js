@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <StyledApp>
-        
+        <Route path="/" component={BubbleSort}/>
       </StyledApp>
     );
   }
