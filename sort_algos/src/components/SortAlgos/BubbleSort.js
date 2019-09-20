@@ -61,8 +61,8 @@ class BubbleSort extends React.Component {
   sort = () => {
     let arr = [...this.state.bubble];
     
-    // const currentItem = document.querySelectorAll(".beam");
-    // currentItem[i].style.color = "green"; for feature styling
+    const currentItem = document.querySelectorAll(".beam");
+    currentItem[i].style.backgroundColor = "green";
 
     if (JSON.stringify(this.state.bubbleSolved) === JSON.stringify(arr)) {
       return null;
@@ -77,18 +77,22 @@ class BubbleSort extends React.Component {
           });
 
           if (i === arr.length - 1) {
+            currentItem[i].style.backgroundColor = "black";
             i = 0;
             this.sort();
           } else {
+            currentItem[i].style.backgroundColor = "black";
             i += 1;
             this.sort();
           }
         }, 50);
       } else {
         if (i === arr.length - 1) {
+          currentItem[i].style.backgroundColor = "black";
           i = 0;
           this.sort();
         } else {
+          currentItem[i].style.backgroundColor = "black";
           i += 1;
           this.sort();
         }
