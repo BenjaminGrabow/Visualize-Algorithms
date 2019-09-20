@@ -61,9 +61,9 @@ class App extends React.Component {
 
   sort = () => {
     let arr = [...this.state.bubble];
-    const currentItem = document.querySelectorAll(".beam");
-
-    currentItem[i].style.color = "green";
+    
+    // const currentItem = document.querySelectorAll(".beam");
+    // currentItem[i].style.color = "green"; for feature styling
 
     if (JSON.stringify(this.state.bubbleSolved) === JSON.stringify(arr)) {
       return null;
