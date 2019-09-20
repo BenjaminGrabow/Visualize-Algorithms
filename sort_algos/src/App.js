@@ -18,62 +18,86 @@ const StyledApp = styled.div`
   }
 `;
 
+let i = 0;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bubble: [2, 5, 8, 3, 1, 4, 6, 9, 7, 10, 25, 15, 12, 11, 22, 13, 24, 17]
+      bubble: [
+        41,
+      ]
     };
   }
 
-  sort = () => {
-
-    // var sorted = false;
-    // while (!sorted) {
-    //   sorted = true;
-    //   this.state.bubble.forEach((element, index, array) => {
-    //     if (element > array[index + 1]) {
-    //       // setInterval(() => {0
-    //       array[index] = array[index + 1];
-    //       array[index + 1] = element;
-    //       // }, 100);
-          
-    //       // setInterval(() => sorted = false, 100)
-    //     }
-    //   });
-    // }
+  componentDidMount = () => {
+    // create array with random numbers (but unique number)
     
+    for (var a=[],i=0;i<40;++i) a[i]=i;
+
+    function shuffle(array) {
+      var tmp, current, top = array.length;
+      if(top) while(--top) {
+        current = Math.floor(Math.random() * (top + 1));
+        tmp = array[current];
+        array[current] = array[top];
+        array[top] = tmp;
+      }
+      return array;
+    }
+    
+    a = shuffle(a);
+
+    this.setState({
+      bubble: a
+    });
+  };
+
+  sort = () => {
     let arr = [...this.state.bubble];
     
-        for(let j=0;j<arr.length;j++) {
-            for(let i = 0; i < arr.length; i++) {
-                if(arr[i]>arr[i+1]) {
-                    var temp = arr[i];
-                    arr[i] = arr[i+1];
-                    arr[i+1] = temp;
-this.changeState(arr);
-break;
-                  }
-            
-                  }
-              }      
-            
-          };
-          
-          changeState = (array) => {
-            this.setState({
-              bubble: array
-    });
+//     const arrSorted = this.state.bubble.sort((a, b) => a - b);
+// console.log(arr)
+//     if (arrSorted === arr) {
+//       return null;
 
-    this.sort();
-  }
+//     } else {
+      if (arr[i] > arr[i + 1]) {
+        setTimeout(() => {
+          var temp = arr[i];
+          arr[i] = arr[i + 1];
+          arr[i + 1] = temp;
+          this.setState({
+            bubble: arr
+          });
+
+          if (i < arr.length) {
+            i += 1;
+            this.sort();
+          } else {
+            i = 0;
+            this.sort();
+          }
+        }, 100);
+      } else {
+        if (i < arr.length) {
+          i += 1;
+          this.sort();
+        } else {
+          i = 0;
+          this.sort();
+        }
+      }
+    // }
+  };
 
   render() {
     return (
       <StyledApp>
         <div className="bubble">
           {this.state.bubble.map((num, index) => (
-            <div key={index}
+            <div
+              key={index}
               className="beam"
               style={{
                 width: "1rem",
