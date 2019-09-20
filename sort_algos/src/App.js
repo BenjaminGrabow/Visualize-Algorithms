@@ -52,16 +52,9 @@ class App extends React.Component {
     let copy = [...a];
 
     this.setState({
-      bubble: a
+      bubble: a,
+      bubbleSolved: copy.sort((a, b) => a - b)
     });
-
-    setTimeout(
-      () =>
-        this.setState(prevState => ({
-          bubbleSolved: copy.sort((a, b) => a - b)
-        })),
-      1000
-    );
   };
 
   sort = () => {
@@ -97,6 +90,10 @@ class App extends React.Component {
         }
       }
     }
+  };
+
+  restart = () => {
+    this.componentDidMount();
   };
 
   render() {
