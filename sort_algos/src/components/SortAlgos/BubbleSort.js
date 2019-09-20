@@ -60,15 +60,19 @@ class BubbleSort extends React.Component {
 
   sort = () => {
     let arr = [...this.state.bubble];
-    
+
     const currentItem = document.querySelectorAll(".beam");
     currentItem[i].style.backgroundColor = "green";
 
     if (JSON.stringify(this.state.bubbleSolved) === JSON.stringify(arr)) {
+      for (let i = 0; i < currentItem.length; i++) {
+        currentItem[i].style.backgroundColor = "green";
+      }
       return null;
     } else {
       if (arr[i] > arr[i + 1]) {
         setTimeout(() => {
+          currentItem[i].style.backgroundColor = "black";
           var temp = arr[i];
           arr[i] = arr[i + 1];
           arr[i + 1] = temp;
@@ -77,22 +81,19 @@ class BubbleSort extends React.Component {
           });
 
           if (i === arr.length - 1) {
-            currentItem[i].style.backgroundColor = "black";
             i = 0;
             this.sort();
           } else {
-            currentItem[i].style.backgroundColor = "black";
             i += 1;
             this.sort();
           }
         }, 50);
       } else {
+        currentItem[i].style.backgroundColor = "black";
         if (i === arr.length - 1) {
-          currentItem[i].style.backgroundColor = "black";
           i = 0;
           this.sort();
         } else {
-          currentItem[i].style.backgroundColor = "black";
           i += 1;
           this.sort();
         }
@@ -101,6 +102,10 @@ class BubbleSort extends React.Component {
   };
 
   restart = () => {
+    const currentItem = document.querySelectorAll(".beam");
+    for (let i = 0; i < currentItem.length; i++) {
+      currentItem[i].style.backgroundColor = "green";
+    }
     this.componentDidMount();
   };
 
@@ -113,7 +118,7 @@ class BubbleSort extends React.Component {
               key={index}
               className="beam"
               style={{
-                height: `${num}rem`,
+                height: `${num}rem`
               }}
             />
           ))}
