@@ -117,6 +117,7 @@ class App extends React.Component {
         </div>
 
         <button onClick={this.sort}>Sort</button>
+        <button onClick={this.restart}>Restart</button>
       </StyledApp>
     );
   }
