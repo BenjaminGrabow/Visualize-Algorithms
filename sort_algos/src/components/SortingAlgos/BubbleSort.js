@@ -1,5 +1,4 @@
 import React from "react";
-import "./BubbleSort.css";
 import styled from "styled-components";
 
 const StyledBubbleSort = styled.div`
