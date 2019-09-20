@@ -72,20 +72,20 @@ class App extends React.Component {
             bubble: arr
           });
 
-          if (i < arr.length) {
-            i += 1;
+          if (i === arr.length - 1) {
+            i = 0;
             this.sort();
           } else {
-            i = 0;
+            i += 1;
             this.sort();
           }
         }, 50);
       } else {
-        if (i < arr.length) {
-          i += 1;
+        if (i === arr.length - 1) {
+          i = 0;
           this.sort();
         } else {
-          i = 0;
+          i += 1;
           this.sort();
         }
       }
