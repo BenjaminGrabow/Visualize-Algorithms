@@ -15,6 +15,8 @@ const StyledApp = styled.div`
 
   .beam {
     margin: 1rem;
+    background-color: black;
+    width: 1rem;
   }
 `;
 
@@ -59,6 +61,9 @@ class App extends React.Component {
 
   sort = () => {
     let arr = [...this.state.bubble];
+    const currentItem = document.querySelectorAll(".beam");
+
+    currentItem[i].style.color = "green";
 
     if (JSON.stringify(this.state.bubbleSolved) === JSON.stringify(arr)) {
       return null;
@@ -105,9 +110,7 @@ class App extends React.Component {
               key={index}
               className="beam"
               style={{
-                width: "1rem",
                 height: `${num}rem`,
-                backgroundColor: "black"
               }}
             />
           ))}
