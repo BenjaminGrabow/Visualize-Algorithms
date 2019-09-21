@@ -6,18 +6,15 @@ import { Route } from "react-router-dom";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
-  componentDidMount = () => {
-
-  };
+  componentDidMount = () => {};
 
   render() {
     return (
       <div>
-        <Route path="/" component={BubbleSort}/>
+        <Route path="/" component={BubbleSort} />
       </div>
     );
   }
