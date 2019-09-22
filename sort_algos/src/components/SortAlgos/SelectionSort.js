@@ -7,10 +7,14 @@ const StyledSelectionSort = styled.div`
 class SelectionSort extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = { 
+      selection: [1]
+     }
   }
   render() { 
-    return (  );
+    return ( <SelectionSort>
+
+    </SelectionSort> );
   }
 }
  
