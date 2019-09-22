@@ -11,6 +11,8 @@ const StyledSelectionSort = styled.div`
     background-color: black;
     width: 1rem;
   }
+
+
 `;
 
 class SelectionSort extends React.Component {
@@ -50,7 +52,48 @@ class SelectionSort extends React.Component {
     });
   };
 
-  sort = () => {};
+  sort = () => {
+    let arr = [...this.state.selection];
+
+    const currentItem = document.querySelectorAll(".beam");
+    currentItem[i].style.backgroundColor = "green";
+
+    if (JSON.stringify(this.state.selectionSolved) === JSON.stringify(arr)) {
+      for (let i = 0; i < currentItem.length; i++) {
+        currentItem[i].style.backgroundColor = "green";
+      }
+      return null;
+    } else {
+      if (arr[i] > arr[i + 1]) {
+        setTimeout(() => {
+          currentItem[i].style.backgroundColor = "black";
+          var temp = arr[i];
+          arr[i] = arr[i + 1];
+          arr[i + 1] = temp;
+          this.setState({
+            bubble: arr
+          });
+
+          if (i === arr.length - 1) {
+            i = 0;
+            this.sort();
+          } else {
+            i += 1;
+            this.sort();
+          }
+        }, 50);
+      } else {
+        currentItem[i].style.backgroundColor = "black";
+        if (i === arr.length - 1) {
+          i = 0;
+          this.sort();
+        } else {
+          i += 1;
+          this.sort();
+        }
+      }
+    }
+  };
 
   restart = () => {
     this.componentDidMount();
