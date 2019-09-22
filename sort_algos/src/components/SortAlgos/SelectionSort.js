@@ -7,7 +7,7 @@ const StyledSelectionSort = styled.div`
   }
 
   .beam {
-    margin: 1rem;
+    margin: .1rem;
     background-color: black;
     width: 1rem;
   }

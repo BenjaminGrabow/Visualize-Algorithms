@@ -15,7 +15,7 @@ const StyledBubbleSort = styled.div`
   .beam {
     margin: 1rem;
     background-color: black;
-    width: 1rem;
+    width: .1rem;
   }
 `;
 
