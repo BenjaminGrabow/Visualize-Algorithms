@@ -15,7 +15,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Route path="/" component={BubbleSort} />
+        <Route path="/bubble" component={BubbleSort} />
+        <Route path="/" component={SelectionSort} />
       </div>
     );
   }
