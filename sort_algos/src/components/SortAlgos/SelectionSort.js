@@ -17,6 +17,7 @@ class SelectionSort extends React.Component {
       {this.state.selection.map(item => <div className="beam" style={{height: `${item}rem`}}/>)}
 
       <button onClick={this.sort}>Sort</button>
+      <button onClick={this.restart}>Restart</button>
     </SelectionSort> );
   }
 }
