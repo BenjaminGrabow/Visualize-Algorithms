@@ -45,7 +45,9 @@ class SelectionSort extends React.Component {
 
   };
 
-  
+  restart = () => {
+  this.componentDidMount();
+  };
 
   render() { 
     return ( <SelectionSort>
