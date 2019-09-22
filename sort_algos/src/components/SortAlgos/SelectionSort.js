@@ -16,7 +16,7 @@ class SelectionSort extends React.Component {
   componentDidMount = () => {
     // create array with random numbers (but unique number)
 
-    for (var a = [], i = 0; i < 40; ++i) a[i] = i;
+    for (var a = [], i = 1; i < 40; ++i) a[i] = i;
 
     function shuffle(array) {
       var tmp,
