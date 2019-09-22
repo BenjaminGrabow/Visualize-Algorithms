@@ -80,7 +80,7 @@ class SelectionSort extends React.Component {
             this.setState({
               selection: arr
             });
-            console.log(arr);
+         
             currentIndex = numberWhichGetsSwappedIndex + 1;
             smallestCurrentNumberIndex = arr[numberWhichGetsSwappedIndex + 1];
             numberWhichGetsSwappedIndex += 1;
@@ -89,7 +89,7 @@ class SelectionSort extends React.Component {
             currentIndex += 1;
             this.sort();
           }
-        }, 2000);
+        }, 100);
       } else {
         if (currentIndex === arr.length - 1) {
           setTimeout(() => {
@@ -99,12 +99,12 @@ class SelectionSort extends React.Component {
             this.setState({
               selection: arr
             });
-            console.log(arr);
+          
             currentIndex = numberWhichGetsSwappedIndex + 1;
             smallestCurrentNumberIndex = arr[numberWhichGetsSwappedIndex + 1];
             numberWhichGetsSwappedIndex += 1;
             this.sort();
-          }, 200);
+          }, 100);
         } else {
           currentIndex += 1;
           this.sort();
