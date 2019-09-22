@@ -58,21 +58,41 @@ class SelectionSort extends React.Component {
     let arr = [...this.state.selection];
 
     const currentItem = document.querySelectorAll(".beam");
-    // currentItem[i].style.backgroundColor = "green";
 
     if (JSON.stringify(this.state.selectionSolved) === JSON.stringify(arr)) {
       for (let i = 0; i < currentItem.length; i++) {
-        // currentItem[i].style.backgroundColor = "green";
+        currentItem[i].style.backgroundColor = "green";
       }
       return null;
     } else {
-
       if (arr[currentIndex] < arr[smallestCurrentNumberIndex]) {
-        smallestCurrentNumberIndex = currentIndex;
-        
+        setTimeout(() => {
+          for (let i = 0; i < currentItem.length; i++) {
+            currentItem[i].style.backgroundColor = "black";
+          }
+          smallestCurrentNumberIndex = currentIndex;
+          currentItem[currentIndex].style.backgroundColor = "green";
+
+          if (currentIndex === arr.length - 1) {
+            let temp = arr[numberWhichGetsSwappedIndex];
+            arr[numberWhichGetsSwappedIndex] = arr[smallestCurrentNumberIndex];
+            arr[smallestCurrentNumberIndex] = temp;
+            this.setState({
+              selection: arr
+            });
+            console.log(arr);
+            currentIndex = numberWhichGetsSwappedIndex + 1;
+            smallestCurrentNumberIndex = arr[numberWhichGetsSwappedIndex + 1];
+            numberWhichGetsSwappedIndex += 1;
+            this.sort();
+          } else {
+            currentIndex += 1;
+            this.sort();
+          }
+        }, 2000);
+      } else {
         if (currentIndex === arr.length - 1) {
           setTimeout(() => {
-            
             let temp = arr[numberWhichGetsSwappedIndex];
             arr[numberWhichGetsSwappedIndex] = arr[smallestCurrentNumberIndex];
             arr[smallestCurrentNumberIndex] = temp;
@@ -85,29 +105,6 @@ class SelectionSort extends React.Component {
             numberWhichGetsSwappedIndex += 1;
             this.sort();
           }, 200);
-            
-          } else {
-            currentIndex += 1;
-            this.sort();
-          }
-      } else {
-
-        if (currentIndex === arr.length - 1) {
-          setTimeout(() => {
-
-          let temp = arr[numberWhichGetsSwappedIndex];
-          arr[numberWhichGetsSwappedIndex] = arr[smallestCurrentNumberIndex];
-          arr[smallestCurrentNumberIndex] = temp;
-          this.setState({
-            selection: arr
-          });
-          console.log(arr);
-          currentIndex = numberWhichGetsSwappedIndex + 1;
-          smallestCurrentNumberIndex = arr[numberWhichGetsSwappedIndex + 1];
-          numberWhichGetsSwappedIndex += 1;
-          this.sort();
-        }, 200);
-
         } else {
           currentIndex += 1;
           this.sort();
