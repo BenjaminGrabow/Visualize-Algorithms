@@ -121,8 +121,8 @@ class SelectionSort extends React.Component {
     return (
       <StyledSelectionSort>
         <div className="selection">
-          {this.state.selection.map(item => (
-            <div className="beam" style={{ height: `${item}rem` }} />
+          {this.state.selection.map((item, index) => (
+            <div key={index} className="beam" style={{ height: `${item}rem` }} />
           ))}
         </div>
 
