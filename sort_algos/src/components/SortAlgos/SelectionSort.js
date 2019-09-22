@@ -8,7 +8,8 @@ class SelectionSort extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      selection: [1]
+      selection: [1],
+      solvedSelection: null
      }
   }
   render() { 
