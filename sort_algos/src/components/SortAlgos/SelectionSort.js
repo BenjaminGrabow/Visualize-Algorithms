@@ -41,6 +41,12 @@ class SelectionSort extends React.Component {
     });
   };
 
+  sort = () => {
+
+  };
+
+  
+
   render() { 
     return ( <SelectionSort>
       {this.state.selection.map(item => <div className="beam" style={{height: `${item}rem`}}/>)}
