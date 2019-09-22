@@ -104,7 +104,7 @@ class BubbleSort extends React.Component {
   restart = () => {
     const currentItem = document.querySelectorAll(".beam");
     for (let i = 0; i < currentItem.length; i++) {
-      currentItem[i].style.backgroundColor = "green";
+      currentItem[i].style.backgroundColor = "black";
     }
     this.componentDidMount();
   };
