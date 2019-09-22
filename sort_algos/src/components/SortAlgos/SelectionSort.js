@@ -14,7 +14,7 @@ const StyledSelectionSort = styled.div`
 `;
 
 let currentIndex = 0;
-let smallestCurrentNumberIndex;
+let smallestCurrentNumberIndex = 0;
 let numberWhichGetsSwappedIndex = 0;
 
 class SelectionSort extends React.Component {
@@ -66,15 +66,34 @@ class SelectionSort extends React.Component {
       }
       return null;
     } else {
-      setTimeout(() => {
-        if (!smallestCurrentNumberIndex) {
-          smallestCurrentNumberIndex = currentIndex;
-        }
+
+      if (arr[currentIndex] < arr[smallestCurrentNumberIndex]) {
+        smallestCurrentNumberIndex = currentIndex;
+        
+        if (currentIndex === arr.length - 1) {
+          setTimeout(() => {
+            
+            let temp = arr[numberWhichGetsSwappedIndex];
+            arr[numberWhichGetsSwappedIndex] = arr[smallestCurrentNumberIndex];
+            arr[smallestCurrentNumberIndex] = temp;
+            this.setState({
+              selection: arr
+            });
+            console.log(arr);
+            currentIndex = numberWhichGetsSwappedIndex + 1;
+            smallestCurrentNumberIndex = arr[numberWhichGetsSwappedIndex + 1];
+            numberWhichGetsSwappedIndex += 1;
+            this.sort();
+          }, 200);
+            
+          } else {
+            currentIndex += 1;
+            this.sort();
+          }
+      } else {
 
         if (currentIndex === arr.length - 1) {
-          if (arr[currentIndex] > arr[smallestCurrentNumberIndex]) {
-            smallestCurrentNumberIndex = currentIndex;
-          }
+          setTimeout(() => {
 
           let temp = arr[numberWhichGetsSwappedIndex];
           arr[numberWhichGetsSwappedIndex] = arr[smallestCurrentNumberIndex];
@@ -82,17 +101,18 @@ class SelectionSort extends React.Component {
           this.setState({
             selection: arr
           });
-          currentIndex = 0;
+          console.log(arr);
+          currentIndex = numberWhichGetsSwappedIndex + 1;
+          smallestCurrentNumberIndex = arr[numberWhichGetsSwappedIndex + 1];
           numberWhichGetsSwappedIndex += 1;
           this.sort();
+        }, 200);
+
         } else {
-          if (arr[currentIndex] > arr[smallestCurrentNumberIndex]) {
-            smallestCurrentNumberIndex = currentIndex;
-          }
           currentIndex += 1;
           this.sort();
         }
-      }, 50);
+      }
     }
   };
 

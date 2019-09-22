@@ -13,9 +13,9 @@ const StyledBubbleSort = styled.div`
   }
 
   .beam {
-    margin: 1rem;
+    margin: .1rem;
     background-color: black;
-    width: .1rem;
+    width: 1rem;
   }
 `;
 
@@ -92,11 +92,10 @@ class BubbleSort extends React.Component {
         currentItem[i].style.backgroundColor = "black";
         if (i === arr.length - 1) {
           i = 0;
-          this.sort();
         } else {
           i += 1;
-          this.sort();
         }
+        this.sort();
       }
     }
   };
