@@ -15,6 +15,8 @@ const StyledSelectionSort = styled.div`
 
 `;
 
+let i = 0;
+
 class SelectionSort extends React.Component {
   constructor(props) {
     super(props);
