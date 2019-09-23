@@ -143,6 +143,11 @@ class BubbleSort extends React.Component {
             />
           ))}
         </div>
+        <div className="description">
+          <p>
+
+          </p>
+        </div>
 <div className="settings">
 <input type="number" onChange={this.handleChange} name="speed" value={this.state.speed} />
 </div>
