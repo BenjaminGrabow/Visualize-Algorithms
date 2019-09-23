@@ -94,6 +94,7 @@ export default function ScrollableTabsButtonPrevent() {
       <Route path="/selection_sort" component={SelectionSort} />
       <Route path="/merge_sort" component={MergeSort} />
       <Route path="/quick_sort" component={QuickSort} />
+      <Route path="/astar" component={AStar} />
     </div>
   );
 }
