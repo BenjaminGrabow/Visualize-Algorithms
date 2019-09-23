@@ -123,7 +123,7 @@ class BubbleSort extends React.Component {
           ))}
         </div>
 <div className="settings">
-
+<input type="number" onChange={this.handleChange} name="speed" value={this.state.speed} />
 </div>
         <button onClick={this.sort}>Sort</button>
         <button onClick={this.restart}>Restart</button>
