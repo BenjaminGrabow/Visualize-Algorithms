@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-  import ContainedTabs from './ContainedTabs';
+  import IterativeTabs from './IterativeTabs';
   
   const IterativeNames = () => {
     const [index, setIndex] = useState(0);
     return (
-      <ContainedTabs
+      <IterativeTabs
         style={{ alignSelf: 'flex-end' }}
         tabs={[
           { label: 'Specs' },
