@@ -145,9 +145,9 @@ class BubbleSort extends React.Component {
         </div>
         <div className="description">
           <h2>Time Complexity</h2>
-          <p>O=(n^2)</p>
+          <p>O(n^2)</p>
           <h2> Space Complexity</h2>
-          <p></p>
+          <p>O(1)</p>
         </div>
         <div className="settings">
           <input
