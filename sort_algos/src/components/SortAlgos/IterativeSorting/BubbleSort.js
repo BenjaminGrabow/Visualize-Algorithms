@@ -122,7 +122,9 @@ class BubbleSort extends React.Component {
             />
           ))}
         </div>
+<div className="settings">
 
+</div>
         <button onClick={this.sort}>Sort</button>
         <button onClick={this.restart}>Restart</button>
       </StyledBubbleSort>
