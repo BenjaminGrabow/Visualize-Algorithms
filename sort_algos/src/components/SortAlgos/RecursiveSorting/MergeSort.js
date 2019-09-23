@@ -10,7 +10,9 @@ class MergeSort extends React.Component {
     this.state = {  }
   }
   render() { 
-    return (  );
+    return ( <StyledMergeSort>
+      
+    </StyledMergeSort>  );
   }
 }
  
