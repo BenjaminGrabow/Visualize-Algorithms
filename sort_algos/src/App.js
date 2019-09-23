@@ -90,6 +90,9 @@ export default function ScrollableTabsButtonPrevent() {
         <NavLink to="/merge_sort">Selection Sort</NavLink>
         <NavLink to="/quick_sort">Selection Sort</NavLink>
       </TabPanel>
+      <TabPanel value={value} index={2}>
+        <NavLink to="/astar">A Star</NavLink>
+      </TabPanel>
       <Route path="/bubble_sort" component={BubbleSort} />
       <Route path="/selection_sort" component={SelectionSort} />
       <Route path="/merge_sort" component={MergeSort} />
