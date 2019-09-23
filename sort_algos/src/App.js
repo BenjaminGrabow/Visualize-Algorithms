@@ -5,20 +5,13 @@ import QuickSort from "./components/SortAlgos/RecursiveSorting/QuickSort";
 import MergeSort from "./components/SortAlgos/RecursiveSorting/MergeSort";
 import "./App.css";
 import { Route, NavLink } from "react-router-dom";
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import HelpIcon from '@material-ui/icons/Help';
-import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import ThumbUp from '@material-ui/icons/ThumbUp';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -40,22 +33,22 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
 function a11yProps(index) {
   return {
     id: `scrollable-prevent-tab-${index}`,
-    'aria-controls': `scrollable-prevent-tabpanel-${index}`,
+    "aria-controls": `scrollable-prevent-tabpanel-${index}`
   };
 }
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
+    width: "100%",
+    backgroundColor: theme.palette.background.paper
+  }
 }));
 
 export default function ScrollableTabsButtonPrevent() {
@@ -76,61 +69,30 @@ export default function ScrollableTabsButtonPrevent() {
           scrollButtons="off"
           aria-label="scrollable prevent tabs example"
         >
-          <Tab icon={<PhoneIcon />} aria-label="phone" {...a11yProps(0)} />
-          <Tab icon={<FavoriteIcon />} aria-label="favorite" {...a11yProps(1)} />
-          <Tab icon={<PersonPinIcon />} aria-label="person" {...a11yProps(2)} />
-          <Tab icon={<HelpIcon />} aria-label="help" {...a11yProps(3)} />
-          <Tab icon={<ShoppingBasket />} aria-label="shopping" {...a11yProps(4)} />
-          <Tab icon={<ThumbDown />} aria-label="up" {...a11yProps(5)} />
-          <Tab icon={<ThumbUp />} aria-label="down" {...a11yProps(6)} />
+          <Tab
+            icon={<h2>Iterative Sorting</h2>}
+            aria-label="phone"
+            {...a11yProps(0)}
+          />
+          <Tab
+            icon={<h2>Recursive Sorting</h2>}
+            aria-label="favorite"
+            {...a11yProps(1)}
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        Item One
+        <NavLink to="/bubble_sort">Bubble Sort</NavLink>
+        <NavLink to="/selection_sort">Selection Sort</NavLink>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <NavLink to="/merge_sort">Selection Sort</NavLink>
+        <NavLink to="/quick_sort">Selection Sort</NavLink>
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
+      <Route path="/bubble_sort" component={BubbleSort} />
+      <Route path="/selection_sort" component={SelectionSort} />
+      <Route path="/merge_sort" component={MergeSort} />
+      <Route path="/quick_sort" component={QuickSort} />
     </div>
   );
 }
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {};
-//   }
-
-//   componentDidMount = () => {};
-
-//   render() {
-//     return (
-//       <div>
-//         <NavLink to="/bubble_sort" >Bubble Sort</NavLink>
-//         <NavLink to="/selection_sort" >Selection Sort</NavLink>
-//         <NavLink to="/merge_sort" >Selection Sort</NavLink>
-//         <NavLink to="/quick_sort" >Selection Sort</NavLink>
-//         <Route path="/bubble_sort" component={BubbleSort} />
-//         <Route path="/selection_sort" component={SelectionSort} />
-//         <Route path="/merge_sort" component={MergeSort} />
-//         <Route path="/quick_sort" component={QuickSort} />
-//       </div>
-//     );
-//   }
-// }
-
-// export default App;
