@@ -27,6 +27,7 @@ class BubbleSort extends React.Component {
     this.state = {
       bubble: [1],
       bubbleSolved: null,
+      checkIfSortStarted: false,
       speed: 50
     };
   }
