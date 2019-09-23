@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
 
-class AStart extends React.Component {
+const StyledAStar = styled.div`
+
+`;
+
+class AStar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {  }
@@ -11,4 +15,4 @@ class AStart extends React.Component {
   }
 }
  
-export default AStart;
+export default AStar;
