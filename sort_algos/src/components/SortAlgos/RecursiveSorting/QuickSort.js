@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 
-
+const StyledQuickSort = styled.div`#
+`;
 
 class QuickSort extends React.Component {
   constructor(props) {
