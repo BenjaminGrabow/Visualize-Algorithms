@@ -3,7 +3,6 @@ import BubbleSort from "./components/SortAlgos/IterativeSorting/BubbleSort";
 import SelectionSort from "./components/SortAlgos/IterativeSorting/SelectionSort";
 import QuickSort from "./components/SortAlgos/RecursiveSorting/QuickSort";
 import MergeSort from "./components/SortAlgos/RecursiveSorting/MergeSort";
-import IterativeTabs from "./components/SortAlgos/IterativeSorting/IterativeTabs";
 import "./App.css";
 import { Route, NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -83,9 +82,8 @@ export default function ScrollableTabsButtonPrevent() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        {/* <NavLink to="/bubble_sort">Bubble Sort</NavLink>
-        <NavLink to="/selection_sort">Selection Sort</NavLink> */}
-        <IterativeTabs/>
+        <NavLink to="/bubble_sort">Bubble Sort</NavLink>
+        <NavLink to="/selection_sort">Selection Sort</NavLink>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <NavLink to="/merge_sort">Selection Sort</NavLink>
