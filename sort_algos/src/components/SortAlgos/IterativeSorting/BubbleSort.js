@@ -13,7 +13,7 @@ const StyledBubbleSort = styled.div`
   }
 
   .beam {
-    margin: .1rem;
+    margin: 0.1rem;
     background-color: black;
     width: 1rem;
   }
@@ -60,18 +60,18 @@ class BubbleSort extends React.Component {
     });
   };
 
-  handleChange = (e) => {
-  this.setState({
-  [e.target.name]: e.target.value,
-  });
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   startSort = () => {
-    if(!this.state.checkIfSortStarted) {
+    if (!this.state.checkIfSortStarted) {
       this.setState({
-        checkIfSortStarted: true,
+        checkIfSortStarted: true
       });
-     this.bubbleSort(); 
+      this.bubbleSort();
     }
   };
 
@@ -124,7 +124,7 @@ class BubbleSort extends React.Component {
     }
 
     this.setState({
-      checkIfSortStarted: false,
+      checkIfSortStarted: false
     });
     this.componentDidMount();
   };
@@ -144,13 +144,19 @@ class BubbleSort extends React.Component {
           ))}
         </div>
         <div className="description">
-          <p>
-
-          </p>
+          <h2>Time Complexity</h2>
+          <p>O=(n^2)</p>
+          <h2> Space Complexity</h2>
+          <p></p>
         </div>
-<div className="settings">
-<input type="number" onChange={this.handleChange} name="speed" value={this.state.speed} />
-</div>
+        <div className="settings">
+          <input
+            type="number"
+            onChange={this.handleChange}
+            name="speed"
+            value={this.state.speed}
+          />
+        </div>
         <button onClick={this.startSort}>Sort</button>
         <button onClick={this.restart}>Restart</button>
       </StyledBubbleSort>
