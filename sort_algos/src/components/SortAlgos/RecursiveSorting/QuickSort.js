@@ -10,7 +10,9 @@ class QuickSort extends React.Component {
     this.state = {  }
   }
   render() { 
-    return (  );
+    return ( <StyledQuickSort>
+      
+    </StyledQuickSort> );
   }
 }
  
