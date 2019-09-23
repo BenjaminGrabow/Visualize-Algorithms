@@ -1,6 +1,8 @@
 import React from "react";
 import BubbleSort from "./components/SortAlgos/IterativeSort/BubbleSort";
 import SelectionSort from "./components/SortAlgos/IterativeSort/SelectionSort";
+import QuickSort from "./components/SortAlgos/RecursiveSort/QuickSort";
+import MergeSort from "./components/SortAlgos/RecursiveSort/MergeSort";
 import "./App.css";
 import { Route, NavLink } from "react-router-dom";
 
