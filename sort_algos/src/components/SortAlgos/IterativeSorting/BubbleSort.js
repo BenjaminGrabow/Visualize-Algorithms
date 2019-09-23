@@ -66,7 +66,16 @@ class BubbleSort extends React.Component {
   });
   };
 
-  sort = () => {
+  startSort = () => {
+    if(!this.state.checkIfSortStarted) {
+      this.setState({
+        checkIfSortStarted: true,
+      });
+     this.bubbleSort(); 
+    }
+  };
+
+  bubbleSort = () => {
     let arr = [...this.state.bubble];
 
     const currentItem = document.querySelectorAll(".beam");
@@ -90,10 +99,10 @@ class BubbleSort extends React.Component {
 
           if (i === arr.length - 1) {
             i = 0;
-            this.sort();
+            this.bubbleSort();
           } else {
             i += 1;
-            this.sort();
+            this.bubbleSort();
           }
         }, this.state.speed);
       } else {
@@ -103,7 +112,7 @@ class BubbleSort extends React.Component {
         } else {
           i += 1;
         }
-        this.sort();
+        this.bubbleSort();
       }
     }
   };
@@ -133,7 +142,7 @@ class BubbleSort extends React.Component {
 <div className="settings">
 <input type="number" onChange={this.handleChange} name="speed" value={this.state.speed} />
 </div>
-        <button onClick={this.sort}>Sort</button>
+        <button onClick={this.startSort}>Sort</button>
         <button onClick={this.restart}>Restart</button>
       </StyledBubbleSort>
     );
