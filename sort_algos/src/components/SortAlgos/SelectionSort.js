@@ -55,6 +55,7 @@ class SelectionSort extends React.Component {
   };
 
   sort = () => {
+    // Fix bug: the swapped longer elements gets green
     let arr = [...this.state.selection];
 
     const currentItem = document.querySelectorAll(".beam");
