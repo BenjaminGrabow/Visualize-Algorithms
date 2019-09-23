@@ -17,8 +17,12 @@ class App extends React.Component {
       <div>
         <NavLink to="/bubble_sort" >Bubble Sort</NavLink>
         <NavLink to="/selection_sort" >Selection Sort</NavLink>
+        <NavLink to="/merge_sort" >Selection Sort</NavLink>
+        <NavLink to="/quick_sort" >Selection Sort</NavLink>
         <Route path="/bubble_sort" component={BubbleSort} />
         <Route path="/selection_sort" component={SelectionSort} />
+        <Route path="/merge_sort" component={MergeSort} />
+        <Route path="/quick_sort" component={QuickSort} />
       </div>
     );
   }
