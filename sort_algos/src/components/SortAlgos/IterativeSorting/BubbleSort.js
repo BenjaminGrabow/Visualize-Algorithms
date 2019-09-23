@@ -26,7 +26,8 @@ class BubbleSort extends React.Component {
     super(props);
     this.state = {
       bubble: [1],
-      bubbleSolved: null
+      bubbleSolved: null,
+      speed: 50
     };
   }
 
@@ -93,7 +94,7 @@ class BubbleSort extends React.Component {
             i += 1;
             this.sort();
           }
-        }, 50);
+        }, this.state.speed);
       } else {
         currentItem[i].style.backgroundColor = "black";
         if (i === arr.length - 1) {
