@@ -80,6 +80,11 @@ export default function ScrollableTabsButtonPrevent() {
             aria-label="favorite"
             {...a11yProps(1)}
           />
+          <Tab
+            icon={<h2>Pathfinding Algos</h2>}
+            aria-label="phone"
+            {...a11yProps(2)}
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
