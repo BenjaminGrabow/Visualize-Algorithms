@@ -1,8 +1,8 @@
 import React from "react";
-import BubbleSort from "./components/SortAlgos/BubbleSort";
-import SelectionSort from "./components/SortAlgos/SelectionSort";
+import BubbleSort from "./components/SortAlgos/IterativeSort/BubbleSort";
+import SelectionSort from "./components/SortAlgos/IterativeSort/SelectionSort";
 import "./App.css";
-import { Route } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
