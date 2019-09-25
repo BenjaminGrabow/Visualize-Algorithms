@@ -222,24 +222,19 @@ class AStar extends React.Component {
     }
 
     // animate the closed and open set
+    let copyOfGrid = [...this.state.grid];
 
     for (let i = 0; i < closedSet.length; i++) {
-      if (!this.state.grid[`${closedSet[i].wall}`]) {
-        const closedSetItem = document.getElementById(
-          `${closedSet[i].i} ${closedSet[i].j}`
-        );
-        closedSetItem.style.backgroundColor = "red";
-      }
+      copyOfGrid[closedSet[i].i][closedSet[i].j].backgroundColor = "red";
     }
 
     for (let i = 0; i < openSet.length; i++) {
-      if (!this.state.grid[`${openSet[i].wall}`]) {
-        const openSetItem = document.getElementById(
-          `${openSet[i].i} ${openSet[i].j}`
-        );
-        openSetItem.style.backgroundColor = "yellow";
-      }
+      copyOfGrid[openSet[i].i][openSet[i].j].backgroundColor = "yellow";
     }
+
+    this.setState({
+      grid: copyOfGrid
+    });
 
     setTimeout(() => this.start(), 50); // because its no while loop we only check for one
     //move  with this method call and must call it again until
@@ -277,7 +272,7 @@ class AStar extends React.Component {
         copyOfGrid[i][j].backgroundColor = "white";
       }
     }
-console.log(copyOfGrid)
+    console.log(copyOfGrid);
     this.setState({
       grid: copyOfGrid
     });
@@ -421,7 +416,6 @@ console.log(copyOfGrid)
 
 export default AStar;
 
-
 // BUG LIST :
 
 //handle restart better: first change in the start function
@@ -429,7 +423,6 @@ export default AStar;
 // add then also state change to the restart
 
 // Check bug in drop method where you set the end and start
-
 
 // Change the start and end letter to icon
 
