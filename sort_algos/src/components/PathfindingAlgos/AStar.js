@@ -256,6 +256,7 @@ class AStar extends React.Component {
   render() {
     return (
       <StyledAStar>
+        <div className="grid">
         {this.state.grid ? (
           <table className="table-hover table-striped table-bordered">
             <tbody>
@@ -289,6 +290,7 @@ class AStar extends React.Component {
             </tbody>
           </table>
         ) : null}
+        </div>
         <button onClick={this.start}>Start</button>
       </StyledAStar>
     );
