@@ -20,8 +20,8 @@ function removeFromArray(arr, elt) {
 }
 
 // An educated guess of how far it is between two points
-function heuristic(a, b) { 
-  let d = Math.sqrt( Math.pow((a.i-a.j), 2) + Math.pow((b.i-b.j), 2) );
+function heuristic(a, b) {
+  let d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
   // let d = abs(a.i - b.i) + abs(a.j - b.j);
   return d;
 }
@@ -77,18 +77,6 @@ function Spot(i, j) {
     if (j > 0) {
       this.neighbors.push(grid[i][j - 1]);
     }
-    if (i > 0 && j > 0) {
-      this.neighbors.push(grid[i - 1][j - 1]);
-    }
-    if (i < cols - 1 && j > 0) {
-      this.neighbors.push(grid[i + 1][j - 1]);
-    }
-    if (i > 0 && j < rows - 1) {
-      this.neighbors.push(grid[i - 1][j + 1]);
-    }
-    if (i < cols - 1 && j < rows - 1) {
-      this.neighbors.push(grid[i + 1][j + 1]);
-    }
   };
 }
 
@@ -107,6 +95,8 @@ let closedSet = [];
 let start;
 let end;
 
+let current;
+
 class AStar extends React.Component {
   constructor(props) {
     super(props);
@@ -120,9 +110,9 @@ class AStar extends React.Component {
     // let rows = 10;
     // let columns = 10;
     // let counter = 0;
-
+    
     // const fill2DimensionsArray = (arr, rows, columns) => {
-    //   for (let i = 0; i < rows; i++) {
+      //   for (let i = 0; i < rows; i++) {
     //     arr.push([counter]);
     //     for (let j = 0; j < columns; j++) {
     //       arr[i][j] = counter;
@@ -132,8 +122,6 @@ class AStar extends React.Component {
     // }
 
     // fill2DimensionsArray(grid, rows, columns);
-
-    
     
     // Making a 2D array
     for (let i = 0; i < cols; i++) {
@@ -145,7 +133,7 @@ class AStar extends React.Component {
         grid[i][j] = new Spot(i, j);
       }
     }
-    
+
     // All the neighbors
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
@@ -167,12 +155,10 @@ class AStar extends React.Component {
       grid: grid
     });
   };
-
+  
   start = () => {
-
     // Am I still searching?
     if (openSet.length > 0) {
-  
       // Best next option
       let winner = 0;
       for (let i = 0; i < openSet.length; i++) {
@@ -180,27 +166,38 @@ class AStar extends React.Component {
           winner = i;
         }
       }
-      let current = openSet[winner];
-  
+      current = openSet[winner];
+      
       // Did I finish?
       if (current === end) {
-        console.log("DONE!");        
-        return "DONE!";
+        console.log("DONE!");
+        let path = [];
+        let temp = current;
+        path.push(temp);
+        while (temp.previous) {
+          path.push(temp.previous);
+          temp = temp.previous;
+        }
+    
+        for (let i = 0; i < path.length; i++) {
+          const thePath = document.getElementById(`${path[i].i}${path[i].j}`);
+          thePath.style.backgroundColor = "green";
+        }
       }
-  
+
       // Best option moves from openSet to closedSet
       removeFromArray(openSet, current);
       closedSet.push(current);
-  
+
       // Check all the neighbors
       let neighbors = current.neighbors;
       for (let i = 0; i < neighbors.length; i++) {
         let neighbor = neighbors[i];
-  
+
         // Valid next spot?
         if (!closedSet.includes(neighbor) && !neighbor.wall) {
           let tempG = current.g + heuristic(neighbor, current);
-  
+
           // Is this a better path than before?
           let newPath = false;
           if (openSet.includes(neighbor)) {
@@ -213,7 +210,7 @@ class AStar extends React.Component {
             newPath = true;
             openSet.push(neighbor);
           }
-  
+
           // Yes, it's a better path
           if (newPath) {
             neighbor.h = heuristic(neighbor, end);
@@ -221,47 +218,35 @@ class AStar extends React.Component {
             neighbor.previous = current;
           }
         }
-  
       }
-    // Uh oh, no solution
+      // Uh oh, no solution
     } else {
-      console.log('no solution');
-      noLoop();
-      return;
+      console.log("no solution");
     }
-  
+
     // Draw current state of everything
     // background(255);
-  
+
     // for (let i = 0; i < cols; i++) {
     //   for (let j = 0; j < rows; j++) {
     //     grid[i][j].show();
     //   }
     // }
-  
+
     // for (let i = 0; i < closedSet.length; i++) {
     //   closedSet[i].show(color(255, 0, 0, 50));
     // }
-  
+
     // for (let i = 0; i < openSet.length; i++) {
     //   openSet[i].show(color(0, 255, 0, 50));
     // }
-  
-  
+
     // // Find the path by working backwards
-    // path = [];
-    // let temp = current;
-    // path.push(temp);
-    // while (temp.previous) {
-    //   path.push(temp.previous);
-    //   temp = temp.previous;
-    // }
-  
-  
+
     // for (let i = 0; i < path.length; i++) {
-      // path[i].show(color(0, 0, 255));
+    // path[i].show(color(0, 0, 255));
     //}
-  
+
     // Drawing path as continuous line
     // noFill();
     // stroke(255, 0, 200);
@@ -271,11 +256,8 @@ class AStar extends React.Component {
     //   vertex(path[i].i * w + w / 2, path[i].j * h + h / 2);
     // }
     // endShape();
-  
-  
-  
-  }
-  
+  };
+
   render() {
     return (
       <StyledAStar>
@@ -285,13 +267,17 @@ class AStar extends React.Component {
               {this.state.grid.map((item, i) => {
                 let entry = item.map((element, j) => {
                   return (
-                    <td className={`box ${element.i}${element.j}`} key={j}>
+                    <td className="box" id={`${element.i}${element.j}`} key={j}>
                       {/* {element} */}
                     </td>
                   );
                 });
                 return (
-                  <tr onClick={(e) => console.log(e.target.className.slice(4,6))} className={`box ${entry.i}`} key={i}>
+                  <tr
+                    onClick={e => console.log(e.target.className.slice(4, 6))}
+                    className={`box ${entry.i}`}
+                    key={i}
+                  >
                     {entry}
                   </tr>
                 );
