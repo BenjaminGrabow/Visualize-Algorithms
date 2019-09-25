@@ -47,9 +47,6 @@ function Spot(i, j) {
 
   // // Am I a wall?
   this.wall = false; // Obstacle => wall
-  if (Math.random() > 0.8) {
-    this.wall = true;
-  }
 
   // Figure out who my neighbors are
   this.addNeighbors = function(grid) {
@@ -244,13 +241,17 @@ class AStar extends React.Component {
     // the the "DONE" statement gets triggered and we need a timeout to animate slowly
   };
 
-  makeWall = (e) => {
+  makeWall = e => {
     // this.state.grid.map(item => item.map(spot => )
-   let copyOfGrid = [...this.state.grid];
+    let copyOfGrid = [...this.state.grid];
     const clickedSpot = e.target.id.split(" ");
-    
-    console.log(this.state.grid[clickedSpot[0]][clickedSpot[1]]);
-  }
+
+    copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
+
+    this.setState({
+      grid: copyOfGrid
+    });
+  };
 
   render() {
     return (
@@ -277,7 +278,7 @@ class AStar extends React.Component {
                 });
                 return (
                   <tr
-                    onClick={this.makeWall}
+                  onMouseEnter={this.makeWall}
                     className={`box ${entry.i}`}
                     key={i}
                   >
