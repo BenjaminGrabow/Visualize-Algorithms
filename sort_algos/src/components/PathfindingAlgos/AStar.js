@@ -350,11 +350,3 @@ class AStar extends React.Component {
 }
 
 export default AStar;
-
-/* <Droppable id="dr1">
-  <Draggable id={techItem.id} className="draggable">
-    <Link id={techItem.id} to={`/protected/${techItem.id}`}>
-      <img id={techItem.model} src={techItem.imgURL} alt={techItem.id} />
-    </Link>
-  </Draggable>
-</Droppable>; */
