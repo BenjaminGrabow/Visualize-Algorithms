@@ -70,8 +70,8 @@ function Spot(i, j) {
 }
 
 // columns and rows
-let cols = 10;
-let rows = 10;
+let cols = 30;
+let rows = 30;
 
 // This will be the 2D array
 let grid = new Array(cols);
@@ -172,7 +172,7 @@ class AStar extends React.Component {
 
         // give the evaluated path a color
         for (let i = 0; i < path.length; i++) {
-          const thePath = document.getElementById(`${path[i].i}${path[i].j}`);
+          const thePath = document.getElementById(`${path[i].i} ${path[i].j}`);
           thePath.style.backgroundColor = "green";
         }
         return null;
@@ -221,14 +221,14 @@ class AStar extends React.Component {
 
     for (let i = 0; i < closedSet.length; i++) {
       const closedSetItem = document.getElementById(
-        `${closedSet[i].i}${closedSet[i].j}`
+        `${closedSet[i].i} ${closedSet[i].j}`
       );
       closedSetItem.style.backgroundColor = "black";
     }
 
     for (let i = 0; i < openSet.length; i++) {
       const openSetItem = document.getElementById(
-        `${openSet[i].i}${openSet[i].j}`
+        `${openSet[i].i} ${openSet[i].j}`
       );
       openSetItem.style.backgroundColor = "yellow";
     }
@@ -247,16 +247,19 @@ class AStar extends React.Component {
               {this.state.grid.map((item, i) => {
                 let entry = item.map((element, j) => {
                   return (
-                    <td className="box" id={`${element.i}${element.j}`}
-                    style={{backgroundColor: `${element.backgroundColor}`}}
-                    key={j}>
+                    <td
+                      className="box"
+                      id={`${element.i} ${element.j}`}
+                      style={{ backgroundColor: `${element.backgroundColor}` }}
+                      key={j}
+                    >
                       {/* {element} */}
                     </td>
                   );
                 });
                 return (
                   <tr
-                    onClick={e => console.log(e.target.className.slice(4, 6))}
+                    onClick={e => console.log(e.target.id)}
                     className={`box ${entry.i}`}
                     key={i}
                   >
