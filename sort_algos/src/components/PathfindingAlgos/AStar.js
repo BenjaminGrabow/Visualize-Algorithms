@@ -288,11 +288,24 @@ class AStar extends React.Component {
                       }}
                       key={j}
                     >
-                      {element.start ? (
-                        <p style={{ margin: "0", padding: "0" }}>S</p>
+                      {element.start ? (<Droppable id="dr1">
+  <Draggable id={} className="draggable">
+                        <p id="start" style={{ margin: "0", padding: "0" }}>
+                          S
+                        </p>
+                        </Draggable>
+                        </Droppable>
                       ) : element.end ? (
-                        <p style={{ margin: "0", padding: "0" }}>E</p>
-                      ) : null}
+                        <Droppable id="dr1">
+  <Draggable id={} className="draggable">
+                        <p id="end" style={{ margin: "0", padding: "0" }}>
+                          E
+                        </p>
+                        </Draggable>
+                        </Droppable>
+                      ) : (
+                        <Droppable id={}></Droppable>
+                      )}
                     </td>
                   );
                 });
