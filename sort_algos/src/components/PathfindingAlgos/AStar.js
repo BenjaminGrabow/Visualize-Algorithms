@@ -134,9 +134,10 @@ class AStar extends React.Component {
       }
     }
 
-    // Start and end
+    //start and end
     start = grid[0][0];
     end = grid[cols - 1][rows - 1];
+
     start.wall = false;
     end.wall = false;
 
@@ -247,11 +248,12 @@ class AStar extends React.Component {
   };
 
   makeWall = e => {
-    console.log(e.target)
-    if(e.target.className !== "dragDrop") { // check the className because of drag and drop bug
+    console.log(e.target);
+    if (e.target.className !== "dragDrop") {
+      // check the className because of drag and drop bug
       let copyOfGrid = [...this.state.grid];
       const clickedSpot = e.target.id.split(" ");
-  
+
       if (
         copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
       ) {
@@ -269,6 +271,23 @@ class AStar extends React.Component {
 
   restart = () => {
     this.componentDidMount();
+  };
+
+  drop = event => {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("transfer");
+    event.target.append(document.getElementById(data));
+    const changeStartOrEnd = event.target.parentNode.id.split(" ");
+
+    if (data === "end") {
+      end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
+    } else {
+      openSet = [this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]]];
+    }
+  };
+
+  allowDrop = event => {
+    event.preventDefault();
   };
 
   render() {
@@ -291,26 +310,67 @@ class AStar extends React.Component {
                       key={j}
                     >
                       {element.start ? (
-                        <Droppable id="dr1" className="dragDrop">
+                        <div
+                          id="dr1"
+                          className="dragDrop"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "1rem",
+                            height: "1rem"
+                          }}
+                          onDrop={this.drop}
+                          onDragOver={this.allowDrop}
+                        >
                           <Draggable id="start" className="dragDrop">
                             <p
+                              className="dragDrop"
                               id="start1"
                               style={{ margin: "0", padding: "0" }}
                             >
                               S
                             </p>
                           </Draggable>
-                        </Droppable>
+                        </div>
                       ) : element.end ? (
-                        <Droppable className="dragDrop" id="dr2">
+                        <div
+                          id="dr2"
+                          className="dragDrop"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "1rem",
+                            height: "1rem"
+                          }}
+                          onDrop={this.drop}
+                          onDragOver={this.allowDrop}
+                        >
                           <Draggable className="dragDrop" id="end">
-                            <p id="end1" style={{ margin: "0", padding: "0" }}>
+                            <p
+                              className="dragDrop"
+                              id="end1"
+                              style={{ margin: "0", padding: "0" }}
+                            >
                               E
                             </p>
                           </Draggable>
-                        </Droppable>
+                        </div>
                       ) : (
-                        <Droppable className="dragDrop" id={`${element.i}${element.j}`}></Droppable>
+                        <div
+                          id={`${element.i}${element.j}`}
+                          className="dragDrop"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "1rem",
+                            height: "1rem"
+                          }}
+                          onDrop={this.drop}
+                          onDragOver={this.allowDrop}
+                        />
                       )}
                     </td>
                   );
