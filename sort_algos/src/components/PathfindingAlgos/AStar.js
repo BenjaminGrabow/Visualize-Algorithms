@@ -264,7 +264,6 @@ class AStar extends React.Component {
   };
 
   restart = () => {
-    // this.componentDidMount();
     let copyOfGrid = [...this.state.grid];
 
     for (let i = 0; i < copyOfGrid.length; i++) {
@@ -272,7 +271,6 @@ class AStar extends React.Component {
         copyOfGrid[i][j].backgroundColor = "white";
       }
     }
-    console.log(copyOfGrid);
     this.setState({
       grid: copyOfGrid
     });
