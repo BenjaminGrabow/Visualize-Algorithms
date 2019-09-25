@@ -216,6 +216,7 @@ class AStar extends React.Component {
       // there is no solution available
     } else {
       console.log("no solution");
+      return null;
     }
 
     // animate the closed and open set
@@ -243,6 +244,14 @@ class AStar extends React.Component {
     // the the "DONE" statement gets triggered and we need a timeout to animate slowly
   };
 
+  makeWall = (e) => {
+    // this.state.grid.map(item => item.map(spot => )
+   let copyOfGrid = [...this.state.grid];
+    const clickedSpot = e.target.id.split(" ");
+    
+    console.log(this.state.grid[clickedSpot[0]][clickedSpot[1]]);
+  }
+
   render() {
     return (
       <StyledAStar>
@@ -268,7 +277,7 @@ class AStar extends React.Component {
                 });
                 return (
                   <tr
-                    onClick={e => console.log(e.target.id)}
+                    onClick={this.makeWall}
                     className={`box ${entry.i}`}
                     key={i}
                   >
