@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 const StyledAStar = styled.div`
   .box {
-    border: 0.1rem solid black;
+    border: 0.05rem solid blue;
     width: 1rem;
     height: 1rem;
+    border-radius: 50%;
   }
 `;
 
@@ -237,7 +238,7 @@ class AStar extends React.Component {
       }
     }
 
-    setTimeout(() => this.start(), 200); // because its no while loop we only check for one
+    setTimeout(() => this.start(), 50); // because its no while loop we only check for one
     //move  with this method call and must call it again until
     // the the "DONE" statement gets triggered and we need a timeout to animate slowly
   };
