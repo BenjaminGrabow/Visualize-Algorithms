@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledAStar = styled.div`
+  display: flex;
+
   .box {
-    border: 0.05rem solid blue;
+    border: 0.1rem solid #3F51B5;
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
@@ -246,17 +248,22 @@ class AStar extends React.Component {
     let copyOfGrid = [...this.state.grid];
     const clickedSpot = e.target.id.split(" ");
 
-    copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
+    if(copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
+      copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
+    } else {
+      copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
+    }
 
     this.setState({
       grid: copyOfGrid
     });
+
+    console.log(e.target.onmouseover === true)
   };
 
   render() {
     return (
       <StyledAStar>
-        <div className="grid">
         {this.state.grid ? (
           <table className="table-hover table-striped table-bordered">
             <tbody>
@@ -279,7 +286,7 @@ class AStar extends React.Component {
                 });
                 return (
                   <tr
-                  onMouseEnter={this.makeWall}
+                    onMouseEnter={this.makeWall}
                     className={`box ${entry.i}`}
                     key={i}
                   >
@@ -290,8 +297,25 @@ class AStar extends React.Component {
             </tbody>
           </table>
         ) : null}
+        <div className="setting-legend">
+          <div className="legend-item">
+            <p>Wall</p>
+            <div className="box" style={{ backgroundColor: "black" }} />
+          </div>
+          <div className="legend-item">
+            <p>Unvisited</p>
+            <div className="box" />
+          </div>
+          <div className="legend-item">
+            <p>Visited</p>
+            <div className="box" style={{ backgroundColor: "red" }} />
+          </div>
+          <div className="legend-item">
+            <p>Next possible move</p>
+            <div className="box" style={{ backgroundColor: "yellow" }} />
+          </div>
+          <button onClick={this.start}>Start</button>
         </div>
-        <button onClick={this.start}>Start</button>
       </StyledAStar>
     );
   }
