@@ -39,8 +39,8 @@ function Spot(i, j) {
   this.f = 0; // h + g = f;
   this.g = 0; // from current field to this field
   this.h = 0; // from this field to the end field
-  this.start = i === 0 && j === 0 ? true : false;
-  this.end = i === cols - 1 && j === rows - 1 ? true : false;
+  this.start = i === 0 && j === 0 ? true : false; // top left corner
+  this.end = i === cols - 1 && j === rows - 1 ? true : false; //bottom right corner
   this.backgroundColor = "white";
 
   // Neighbors
@@ -269,7 +269,18 @@ class AStar extends React.Component {
   };
 
   restart = () => {
-    this.componentDidMount();
+    // this.componentDidMount();
+    let copyOfGrid = [...this.state.grid];
+
+    for (let i = 0; i < copyOfGrid.length; i++) {
+      for (let j = 0; j < copyOfGrid.length; j++) {
+        copyOfGrid[i][j].backgroundColor = "white";
+      }
+    }
+console.log(copyOfGrid)
+    this.setState({
+      grid: copyOfGrid
+    });
   };
 
   drop = event => {
@@ -409,3 +420,12 @@ class AStar extends React.Component {
 }
 
 export default AStar;
+
+
+// BUG LIST :
+
+//handle restart better: first change in the start function
+// the backgroundcolor change only in the state and not as inline style change
+// add then also state change to the restart
+
+// Check bug in drop method where you set the end and start
