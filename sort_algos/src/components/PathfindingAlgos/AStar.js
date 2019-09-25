@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Draggable from "./DragDrop/Draggable";
-import Droppable from "./DragDrop/Droppable";
 
 const StyledAStar = styled.div`
   display: flex;
