@@ -315,6 +315,7 @@ class AStar extends React.Component {
             <div className="box" style={{ backgroundColor: "yellow" }} />
           </div>
           <button onClick={this.start}>Start</button>
+          <button onClick={this.restart}>Restart</button>
         </div>
       </StyledAStar>
     );
