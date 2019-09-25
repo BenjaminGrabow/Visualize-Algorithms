@@ -12,7 +12,7 @@ const StyledAStar = styled.div`
 // Function to delete element from the array
 function removeFromArray(arr, elt) {
   // Could use indexOf here instead to be more efficient
-  for (var i = arr.length - 1; i >= 0; i--) {
+  for (let i = arr.length - 1; i >= 0; i--) {
     if (arr[i] == elt) {
       arr.splice(i, 1);
     }
@@ -20,9 +20,9 @@ function removeFromArray(arr, elt) {
 }
 
 // An educated guess of how far it is between two points
-function heuristic(a, b) {
-  var d = dist(a.i, a.j, b.i, b.j);
-  // var d = abs(a.i - b.i) + abs(a.j - b.j);
+function heuristic(a, b) { 
+  let d = Math.sqrt( Math.pow((a.i-a.j), 2) + Math.pow((b.i-b.j), 2) );
+  // let d = abs(a.i - b.i) + abs(a.j - b.j);
   return d;
 }
 
@@ -174,18 +174,18 @@ class AStar extends React.Component {
     if (openSet.length > 0) {
   
       // Best next option
-      var winner = 0;
-      for (var i = 0; i < openSet.length; i++) {
+      let winner = 0;
+      for (let i = 0; i < openSet.length; i++) {
         if (openSet[i].f < openSet[winner].f) {
           winner = i;
         }
       }
-      var current = openSet[winner];
+      let current = openSet[winner];
   
       // Did I finish?
       if (current === end) {
-        break;
-        console.log("DONE!");
+        console.log("DONE!");        
+        return "DONE!";
       }
   
       // Best option moves from openSet to closedSet
@@ -193,16 +193,16 @@ class AStar extends React.Component {
       closedSet.push(current);
   
       // Check all the neighbors
-      var neighbors = current.neighbors;
-      for (var i = 0; i < neighbors.length; i++) {
-        var neighbor = neighbors[i];
+      let neighbors = current.neighbors;
+      for (let i = 0; i < neighbors.length; i++) {
+        let neighbor = neighbors[i];
   
         // Valid next spot?
         if (!closedSet.includes(neighbor) && !neighbor.wall) {
-          var tempG = current.g + heuristic(neighbor, current);
+          let tempG = current.g + heuristic(neighbor, current);
   
           // Is this a better path than before?
-          var newPath = false;
+          let newPath = false;
           if (openSet.includes(neighbor)) {
             if (tempG < neighbor.g) {
               neighbor.g = tempG;
@@ -233,24 +233,24 @@ class AStar extends React.Component {
     // Draw current state of everything
     // background(255);
   
-    // for (var i = 0; i < cols; i++) {
-    //   for (var j = 0; j < rows; j++) {
+    // for (let i = 0; i < cols; i++) {
+    //   for (let j = 0; j < rows; j++) {
     //     grid[i][j].show();
     //   }
     // }
   
-    // for (var i = 0; i < closedSet.length; i++) {
+    // for (let i = 0; i < closedSet.length; i++) {
     //   closedSet[i].show(color(255, 0, 0, 50));
     // }
   
-    // for (var i = 0; i < openSet.length; i++) {
+    // for (let i = 0; i < openSet.length; i++) {
     //   openSet[i].show(color(0, 255, 0, 50));
     // }
   
   
     // // Find the path by working backwards
     // path = [];
-    // var temp = current;
+    // let temp = current;
     // path.push(temp);
     // while (temp.previous) {
     //   path.push(temp.previous);
@@ -258,7 +258,7 @@ class AStar extends React.Component {
     // }
   
   
-    // for (var i = 0; i < path.length; i++) {
+    // for (let i = 0; i < path.length; i++) {
       // path[i].show(color(0, 0, 255));
     //}
   
@@ -267,7 +267,7 @@ class AStar extends React.Component {
     // stroke(255, 0, 200);
     // strokeWeight(w / 2);
     // beginShape();
-    // for (var i = 0; i < path.length; i++) {
+    // for (let i = 0; i < path.length; i++) {
     //   vertex(path[i].i * w + w / 2, path[i].j * h + h / 2);
     // }
     // endShape();
