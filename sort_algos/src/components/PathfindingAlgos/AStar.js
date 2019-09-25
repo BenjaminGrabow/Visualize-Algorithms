@@ -5,7 +5,7 @@ const StyledAStar = styled.div`
   display: flex;
 
   .box {
-    border: 0.1rem solid #3F51B5;
+    border: 0.1rem solid #3f51b5;
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
@@ -248,7 +248,7 @@ class AStar extends React.Component {
     let copyOfGrid = [...this.state.grid];
     const clickedSpot = e.target.id.split(" ");
 
-    if(copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
+    if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
     } else {
       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
@@ -257,8 +257,10 @@ class AStar extends React.Component {
     this.setState({
       grid: copyOfGrid
     });
+  };
 
-    console.log(e.target.onmouseover === true)
+  restart = () => {
+    this.componentDidMount();
   };
 
   render() {
