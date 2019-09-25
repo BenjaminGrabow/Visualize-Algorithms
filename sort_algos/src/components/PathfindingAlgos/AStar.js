@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Draggable from "./DragDrop/Draggable";
+import Droppable from "./DragDrop/Droppable";
 
 const StyledAStar = styled.div`
   display: flex;
@@ -38,7 +40,8 @@ function Spot(i, j) {
   this.f = 0; // h + g = f;
   this.g = 0; // from current field to this field
   this.h = 0; // from this field to the end field
-
+  this.start = i === 0 && j === 0 ? true : false;
+  this.end = i === cols - 1 && j === rows - 1 ? true : false;
   this.backgroundColor = "white";
 
   // Neighbors
@@ -285,16 +288,16 @@ class AStar extends React.Component {
                       }}
                       key={j}
                     >
-                      {/* {element} */}
+                      {element.start ? (
+                        <p style={{ margin: "0", padding: "0" }}>S</p>
+                      ) : element.end ? (
+                        <p style={{ margin: "0", padding: "0" }}>E</p>
+                      ) : null}
                     </td>
                   );
                 });
                 return (
-                  <tr
-                    onMouseEnter={this.makeWall}
-                    className={`box ${entry.i}`}
-                    key={i}
-                  >
+                  <tr onClick={this.makeWall} className="box" key={i}>
                     {entry}
                   </tr>
                 );
@@ -326,5 +329,13 @@ class AStar extends React.Component {
     );
   }
 }
-
+{
+  /* <Droppable id="dr1">
+  <Draggable id={techItem.id} className="draggable">
+    <Link id={techItem.id} to={`/protected/${techItem.id}`}>
+      <img id={techItem.model} src={techItem.imgURL} alt={techItem.id} />
+    </Link>
+  </Draggable>
+</Droppable>; */
+}
 export default AStar;

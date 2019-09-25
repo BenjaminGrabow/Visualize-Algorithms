@@ -1,5 +1,4 @@
 import React from "react";
-import StyledDiv from "./StyledDiv";
 
 class Droppable extends React.Component {
   drop = event => {
@@ -15,13 +14,13 @@ class Droppable extends React.Component {
 
   render() {
     return (
-      <StyledDiv
+      <div
         id={this.props.id}
         onDrop={this.drop}
         onDragOver={this.allowDrop}
       >
         {this.props.children}
-      </StyledDiv>
+      </div>
     );
   }
 }
