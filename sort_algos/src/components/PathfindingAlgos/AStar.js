@@ -233,13 +233,15 @@ class AStar extends React.Component {
     //   }
     // }
 
-    // for (let i = 0; i < closedSet.length; i++) {
-    //   closedSet[i].show(color(255, 0, 0, 50));
-    // }
+    for (let i = 0; i < closedSet.length; i++) {
+      const closedSetItem = document.getElementById(`${closedSet[i].i}${closedSet[i].j}`);
+      closedSetItem.style.backgroundColor = "black";
+    }
 
-    // for (let i = 0; i < openSet.length; i++) {
-    //   openSet[i].show(color(0, 255, 0, 50));
-    // }
+    for (let i = 0; i < openSet.length; i++) {
+     const openSetItem = document.getElementById(`${openSet[i].i}${openSet[i].j}`);
+     openSetItem.style.backgroundColor = "yellow";
+    }
 
     // // Find the path by working backwards
 
@@ -256,7 +258,7 @@ class AStar extends React.Component {
     //   vertex(path[i].i * w + w / 2, path[i].j * h + h / 2);
     // }
     // endShape();
-    this.start();
+    setTimeout(() => this.start(), 200);
   };
 
   render() {
