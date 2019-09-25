@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledAStar = styled.div`
-
   .box {
     border: 0.1rem solid black;
     width: 1rem;
@@ -146,11 +145,27 @@ class AStar extends React.Component {
   }
 
   componentDidMount = () => {
-    const a = Array(5).fill()
-      .map(x => Array(10).fill());
-      console.log(a)
+    let arr = [];
+    let rows = 10;
+    let columns = 10;
+    let counter = 0;
+
+    
+    const fill2DimensionsArray = (arr, rows, columns) => {
+      for (let i = 0; i < rows; i++) {
+        arr.push([counter]);
+        for (let j = 0; j < columns; j++) {
+          arr[i][j] = counter;
+        counter += 1;
+        }
+      }
+    }
+
+    fill2DimensionsArray(arr, rows, columns);
+    
+    console.log(arr);
     this.setState({
-      grid: a
+      grid: arr
     });
   };
 
@@ -161,10 +176,18 @@ class AStar extends React.Component {
           <table className="table-hover table-striped table-bordered">
             <tbody>
               {this.state.grid.map((item, i) => {
-                var entry = item.map((element, j) => {
-                  return <td className={`box ${element}`} key={j}>{element}</td>;
+                let entry = item.map((element, j) => {
+                  return (
+                    <td className={`box ${element}`} key={j}>
+                      {element}
+                    </td>
+                  );
                 });
-                return <tr className={`box ${entry}`} key={i}>{entry}</tr>;
+                return (
+                  <tr className={`box ${entry}`} key={i}>
+                    {entry}
+                  </tr>
+                );
               })}
             </tbody>
           </table>
