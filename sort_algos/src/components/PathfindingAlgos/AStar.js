@@ -416,10 +416,6 @@ export default AStar;
 
 // BUG LIST :
 
-//handle restart better: first change in the start function
-// the backgroundcolor change only in the state and not as inline style change
-// add then also state change to the restart
-
 // Check bug in drop method where you set the end and start
 
 // Change the start and end letter to icon
