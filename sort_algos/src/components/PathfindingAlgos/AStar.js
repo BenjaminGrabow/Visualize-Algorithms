@@ -248,15 +248,18 @@ class AStar extends React.Component {
     let copyOfGrid = [...this.state.grid];
     const clickedSpot = e.target.id.split(" ");
 
-    if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
-      copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
-    } else {
-      copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
+    if (
+      copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
+    ) {
+      if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
+        copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
+      } else {
+        copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
+      }
+      this.setState({
+        grid: copyOfGrid
+      });
     }
-
-    this.setState({
-      grid: copyOfGrid
-    });
   };
 
   restart = () => {
