@@ -170,6 +170,7 @@ class AStar extends React.Component {
       // Did I finish?
       if (current === end) {
         console.log("DONE!");
+        // // Find the path by working backwards
         let path = [];
         let temp = current;
         path.push(temp);
@@ -178,6 +179,7 @@ class AStar extends React.Component {
           temp = temp.previous;
         }
     
+        // give the evaluated path a color
         for (let i = 0; i < path.length; i++) {
           const thePath = document.getElementById(`${path[i].i}${path[i].j}`);
           thePath.style.backgroundColor = "green";
@@ -219,19 +221,12 @@ class AStar extends React.Component {
           }
         }
       }
-      // Uh oh, no solution
+      // there is no solution available
     } else {
       console.log("no solution");
     }
 
-    // Draw current state of everything
-    // background(255);
-
-    // for (let i = 0; i < cols; i++) {
-    //   for (let j = 0; j < rows; j++) {
-    //     grid[i][j].show();
-    //   }
-    // }
+    // animate the closed and open set
 
     for (let i = 0; i < closedSet.length; i++) {
       const closedSetItem = document.getElementById(`${closedSet[i].i}${closedSet[i].j}`);
@@ -243,22 +238,10 @@ class AStar extends React.Component {
      openSetItem.style.backgroundColor = "yellow";
     }
 
-    // // Find the path by working backwards
 
-    // for (let i = 0; i < path.length; i++) {
-    // path[i].show(color(0, 0, 255));
-    //}
-
-    // Drawing path as continuous line
-    // noFill();
-    // stroke(255, 0, 200);
-    // strokeWeight(w / 2);
-    // beginShape();
-    // for (let i = 0; i < path.length; i++) {
-    //   vertex(path[i].i * w + w / 2, path[i].j * h + h / 2);
-    // }
-    // endShape();
-    setTimeout(() => this.start(), 200);
+    setTimeout(() => this.start(), 200); // because its no while loop we only check for one 
+    //move  with this method call and must call it again until
+    // the the "DONE" statement gets triggered and we need a timeout to animate slowly
   };
 
   render() {
