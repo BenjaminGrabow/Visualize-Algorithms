@@ -48,17 +48,6 @@ function Spot(i, j) {
   //   this.wall = true;
   // }
 
-  // // Display me
-  // this.show = function(col) {
-  //   if (this.wall) {
-  //     fill(0);
-  //     noStroke();
-  //     ellipse(this.i * w + w / 2, this.j * h + h / 2, w / 2, h / 2);
-  //   } else if (col){
-  //     fill(col);
-  //     rect(this.i * w, this.j * h, w, h);
-  //   }
-  // }
 
   // Figure out who my neighbors are
   this.addNeighbors = function(grid) {
@@ -105,6 +94,7 @@ class AStar extends React.Component {
   }
 
   componentDidMount = () => {
+  // Other way of doing 2D Array:
     // let grid = [];
     // let rows = 10;
     // let columns = 10;
