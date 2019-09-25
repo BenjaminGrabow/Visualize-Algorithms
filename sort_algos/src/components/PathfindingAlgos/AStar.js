@@ -45,10 +45,10 @@ function Spot(i, j) {
   this.previous = undefined;
 
   // // Am I a wall?
-  // this.wall = false;
-  // if (random(1) < 0.4) {
-  //   this.wall = true;
-  // }
+  this.wall = false; // Obstacle => wall
+  if (Math.random() > 0.8) {
+    this.wall = true;
+  }
 
   // Figure out who my neighbors are
   this.addNeighbors = function(grid) {
@@ -220,17 +220,21 @@ class AStar extends React.Component {
     // animate the closed and open set
 
     for (let i = 0; i < closedSet.length; i++) {
-      const closedSetItem = document.getElementById(
-        `${closedSet[i].i} ${closedSet[i].j}`
-      );
-      closedSetItem.style.backgroundColor = "black";
+      if (!this.state.grid[`${closedSet[i].wall}`]) {
+        const closedSetItem = document.getElementById(
+          `${closedSet[i].i} ${closedSet[i].j}`
+        );
+        closedSetItem.style.backgroundColor = "red";
+      }
     }
 
     for (let i = 0; i < openSet.length; i++) {
-      const openSetItem = document.getElementById(
-        `${openSet[i].i} ${openSet[i].j}`
-      );
-      openSetItem.style.backgroundColor = "yellow";
+      if (!this.state.grid[`${openSet[i].wall}`]) {
+        const openSetItem = document.getElementById(
+          `${openSet[i].i} ${openSet[i].j}`
+        );
+        openSetItem.style.backgroundColor = "yellow";
+      }
     }
 
     setTimeout(() => this.start(), 200); // because its no while loop we only check for one
@@ -250,7 +254,11 @@ class AStar extends React.Component {
                     <td
                       className="box"
                       id={`${element.i} ${element.j}`}
-                      style={{ backgroundColor: `${element.backgroundColor}` }}
+                      style={{
+                        backgroundColor: `${
+                          element.wall ? "black" : element.backgroundColor
+                        }`
+                      }}
                       key={j}
                     >
                       {/* {element} */}
