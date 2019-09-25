@@ -432,3 +432,5 @@ export default AStar;
 
 
 // Change the start and end letter to icon
+
+// start with the legend
