@@ -13,7 +13,7 @@ const StyledAStar = styled.div`
 function removeFromArray(arr, elt) {
   // Could use indexOf here instead to be more efficient
   for (let i = arr.length - 1; i >= 0; i--) {
-    if (arr[i] == elt) {
+    if (arr[i] === elt) {
       arr.splice(i, 1);
     }
   }
@@ -22,7 +22,6 @@ function removeFromArray(arr, elt) {
 // An educated guess of how far it is between two points
 function heuristic(a, b) {
   let d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
-  // let d = abs(a.i - b.i) + abs(a.j - b.j);
   return d;
 }
 
@@ -33,9 +32,9 @@ function Spot(i, j) {
   this.j = j;
 
   // f, g, and h values for A*
-  this.f = 0;
-  this.g = 0;
-  this.h = 0;
+  this.f = 0; // h + g = f;
+  this.g = 0; // from current field to this field
+  this.h = 0; // from this field to the end field
 
   // Neighbors
   this.neighbors = [];
@@ -183,6 +182,7 @@ class AStar extends React.Component {
           const thePath = document.getElementById(`${path[i].i}${path[i].j}`);
           thePath.style.backgroundColor = "green";
         }
+        return null;
       }
 
       // Best option moves from openSet to closedSet
@@ -256,6 +256,7 @@ class AStar extends React.Component {
     //   vertex(path[i].i * w + w / 2, path[i].j * h + h / 2);
     // }
     // endShape();
+    this.start();
   };
 
   render() {
