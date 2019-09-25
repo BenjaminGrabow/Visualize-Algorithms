@@ -36,6 +36,8 @@ function Spot(i, j) {
   this.g = 0; // from current field to this field
   this.h = 0; // from this field to the end field
 
+  this.backgroundColor = "white";
+
   // Neighbors
   this.neighbors = [];
 
