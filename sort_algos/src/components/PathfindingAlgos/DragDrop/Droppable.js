@@ -15,6 +15,14 @@ class Droppable extends React.Component {
   render() {
     return (
       <div
+        className="dragDrop"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "1rem",
+          height: "1rem"
+        }}
         id={this.props.id}
         onDrop={this.drop}
         onDragOver={this.allowDrop}

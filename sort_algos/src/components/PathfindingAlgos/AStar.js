@@ -8,8 +8,8 @@ const StyledAStar = styled.div`
 
   .box {
     border: 0.1rem solid #3f51b5;
-    width: 1rem;
-    height: 1rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
   }
 `;
@@ -73,8 +73,8 @@ function Spot(i, j) {
 }
 
 // columns and rows
-let cols = 30;
-let rows = 30;
+let cols = 10;
+let rows = 10;
 
 // This will be the 2D array
 let grid = new Array(cols);
@@ -247,21 +247,23 @@ class AStar extends React.Component {
   };
 
   makeWall = e => {
-    // this.state.grid.map(item => item.map(spot => )
-    let copyOfGrid = [...this.state.grid];
-    const clickedSpot = e.target.id.split(" ");
-
-    if (
-      copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
-    ) {
-      if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
-        copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
-      } else {
-        copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
+    console.log(e.target)
+    if(e.target.className !== "dragDrop") { // check the className because of drag and drop bug
+      let copyOfGrid = [...this.state.grid];
+      const clickedSpot = e.target.id.split(" ");
+  
+      if (
+        copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
+      ) {
+        if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
+          copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
+        } else {
+          copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
+        }
+        this.setState({
+          grid: copyOfGrid
+        });
       }
-      this.setState({
-        grid: copyOfGrid
-      });
     }
   };
 
@@ -288,23 +290,27 @@ class AStar extends React.Component {
                       }}
                       key={j}
                     >
-                      {element.start ? (<Droppable id="dr1">
-  <Draggable id={} className="draggable">
-                        <p id="start" style={{ margin: "0", padding: "0" }}>
-                          S
-                        </p>
-                        </Draggable>
+                      {element.start ? (
+                        <Droppable id="dr1" className="dragDrop">
+                          <Draggable id="start" className="dragDrop">
+                            <p
+                              id="start1"
+                              style={{ margin: "0", padding: "0" }}
+                            >
+                              S
+                            </p>
+                          </Draggable>
                         </Droppable>
                       ) : element.end ? (
-                        <Droppable id="dr1">
-  <Draggable id={} className="draggable">
-                        <p id="end" style={{ margin: "0", padding: "0" }}>
-                          E
-                        </p>
-                        </Draggable>
+                        <Droppable className="dragDrop" id="dr2">
+                          <Draggable className="dragDrop" id="end">
+                            <p id="end1" style={{ margin: "0", padding: "0" }}>
+                              E
+                            </p>
+                          </Draggable>
                         </Droppable>
                       ) : (
-                        <Droppable id={}></Droppable>
+                        <Droppable className="dragDrop" id={`${element.i}${element.j}`}></Droppable>
                       )}
                     </td>
                   );
@@ -342,13 +348,13 @@ class AStar extends React.Component {
     );
   }
 }
-{
-  /* <Droppable id="dr1">
+
+export default AStar;
+
+/* <Droppable id="dr1">
   <Draggable id={techItem.id} className="draggable">
     <Link id={techItem.id} to={`/protected/${techItem.id}`}>
       <img id={techItem.model} src={techItem.imgURL} alt={techItem.id} />
     </Link>
   </Draggable>
 </Droppable>; */
-}
-export default AStar;

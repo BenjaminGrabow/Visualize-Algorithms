@@ -12,7 +12,7 @@ class Draggable extends React.Component {
   render() {
     return (
       <div
-      
+        className="dragDrop"
         id={this.props.id}
         draggable="true"
         onDragStart={this.drag}
