@@ -50,7 +50,6 @@ function Spot(i, j) {
   //   this.wall = true;
   // }
 
-
   // Figure out who my neighbors are
   this.addNeighbors = function(grid) {
     let i = this.i;
@@ -96,14 +95,14 @@ class AStar extends React.Component {
   }
 
   componentDidMount = () => {
-  // Other way of doing 2D Array:
+    // Other way of doing 2D Array:
     // let grid = [];
     // let rows = 10;
     // let columns = 10;
     // let counter = 0;
-    
+
     // const fill2DimensionsArray = (arr, rows, columns) => {
-      //   for (let i = 0; i < rows; i++) {
+    //   for (let i = 0; i < rows; i++) {
     //     arr.push([counter]);
     //     for (let j = 0; j < columns; j++) {
     //       arr[i][j] = counter;
@@ -113,12 +112,12 @@ class AStar extends React.Component {
     // }
 
     // fill2DimensionsArray(grid, rows, columns);
-    
+
     // Making a 2D array
     for (let i = 0; i < cols; i++) {
       grid[i] = new Array(rows);
     }
-    
+
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
         grid[i][j] = new Spot(i, j);
@@ -131,22 +130,22 @@ class AStar extends React.Component {
         grid[i][j].addNeighbors(grid);
       }
     }
-    
+
     // Start and end
     start = grid[0][0];
     end = grid[cols - 1][rows - 1];
     start.wall = false;
     end.wall = false;
-    
+
     // openSet starts with beginning only
     openSet.push(start);
-    
+
     console.log(grid);
     this.setState({
       grid: grid
     });
   };
-  
+
   start = () => {
     // Am I still searching?
     if (openSet.length > 0) {
@@ -158,7 +157,7 @@ class AStar extends React.Component {
         }
       }
       current = openSet[winner];
-      
+
       // Did I finish?
       if (current === end) {
         console.log("DONE!");
@@ -170,7 +169,7 @@ class AStar extends React.Component {
           path.push(temp.previous);
           temp = temp.previous;
         }
-    
+
         // give the evaluated path a color
         for (let i = 0; i < path.length; i++) {
           const thePath = document.getElementById(`${path[i].i}${path[i].j}`);
@@ -221,17 +220,20 @@ class AStar extends React.Component {
     // animate the closed and open set
 
     for (let i = 0; i < closedSet.length; i++) {
-      const closedSetItem = document.getElementById(`${closedSet[i].i}${closedSet[i].j}`);
+      const closedSetItem = document.getElementById(
+        `${closedSet[i].i}${closedSet[i].j}`
+      );
       closedSetItem.style.backgroundColor = "black";
     }
 
     for (let i = 0; i < openSet.length; i++) {
-     const openSetItem = document.getElementById(`${openSet[i].i}${openSet[i].j}`);
-     openSetItem.style.backgroundColor = "yellow";
+      const openSetItem = document.getElementById(
+        `${openSet[i].i}${openSet[i].j}`
+      );
+      openSetItem.style.backgroundColor = "yellow";
     }
 
-
-    setTimeout(() => this.start(), 200); // because its no while loop we only check for one 
+    setTimeout(() => this.start(), 200); // because its no while loop we only check for one
     //move  with this method call and must call it again until
     // the the "DONE" statement gets triggered and we need a timeout to animate slowly
   };
@@ -245,7 +247,9 @@ class AStar extends React.Component {
               {this.state.grid.map((item, i) => {
                 let entry = item.map((element, j) => {
                   return (
-                    <td className="box" id={`${element.i}${element.j}`} key={j}>
+                    <td className="box" id={`${element.i}${element.j}`}
+                    style={{backgroundColor: `${element.backgroundColor}`}}
+                    key={j}>
                       {/* {element} */}
                     </td>
                   );
