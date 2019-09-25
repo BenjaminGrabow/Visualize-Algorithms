@@ -174,6 +174,7 @@ class AStar extends React.Component {
             </tbody>
           </table>
         ) : null}
+        <button onClick={this.start}>Start</button>
       </StyledAStar>
     );
   }
