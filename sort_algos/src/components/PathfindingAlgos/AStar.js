@@ -1,7 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledAStar = styled.div``;
+const StyledAStar = styled.div`
+
+  .box {
+    border: 0.1rem solid black;
+    width: 1rem;
+    height: 1rem;
+  }
+`;
 
 // function removeFromArray(arr, elt) {
 //   for (let i = arr.length - 1; i >= 0; i--) {
@@ -84,7 +91,7 @@ const StyledAStar = styled.div``;
 
 // function draw() {
 //   if (openSet.length > 0) {
-//     var winner = 0;
+//     let winner = 0;
 //     for (let i = 0; i < openSet.length; i++) {
 //       if (openSet[i].f < openSet[winner].f) {
 //         winner = i;
@@ -133,13 +140,37 @@ const StyledAStar = styled.div``;
 class AStar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      grid: null
+    };
   }
 
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    const a = Array(5).fill()
+      .map(x => Array(10).fill());
+      console.log(a)
+    this.setState({
+      grid: a
+    });
+  };
 
   render() {
-    return <StyledAStar></StyledAStar>;
+    return (
+      <StyledAStar>
+        {this.state.grid ? (
+          <table className="table-hover table-striped table-bordered">
+            <tbody>
+              {this.state.grid.map((item, i) => {
+                var entry = item.map((element, j) => {
+                  return <td className={`box ${element}`} key={j}>{element}</td>;
+                });
+                return <tr className={`box ${entry}`} key={i}>{entry}</tr>;
+              })}
+            </tbody>
+          </table>
+        ) : null}
+      </StyledAStar>
+    );
   }
 }
 
