@@ -8,8 +8,8 @@ const StyledAStar = styled.div`
 
   .box {
     border: 0.1rem solid #3f51b5;
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
   }
 `;
@@ -73,8 +73,8 @@ function Spot(i, j) {
 }
 
 // columns and rows
-let cols = 10;
-let rows = 10;
+let cols = 20;
+let rows = 20;
 
 // This will be the 2D array
 let grid = new Array(cols);
