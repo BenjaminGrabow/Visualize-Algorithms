@@ -134,8 +134,12 @@ class AStar extends React.Component {
     }
 
     //start and end
-    start = grid[0][0];
-    end = grid[cols - 1][rows - 1];
+    if (!start) {
+      start = grid[0][0];
+    }
+    if (!end) {
+      end = grid[cols - 1][rows - 1];
+    }
 
     start.wall = false;
     end.wall = false;
@@ -426,6 +430,8 @@ class AStar extends React.Component {
 export default AStar;
 
 // BUG LIST :
+
+// fix bug for start and end in Spot constructor 
 
 // fix restart bug
 
