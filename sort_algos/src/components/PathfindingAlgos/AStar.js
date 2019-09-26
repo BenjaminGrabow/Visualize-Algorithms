@@ -269,11 +269,23 @@ class AStar extends React.Component {
     for (let i = 0; i < copyOfGrid.length; i++) {
       for (let j = 0; j < copyOfGrid.length; j++) {
         copyOfGrid[i][j].backgroundColor = "white";
+        copyOfGrid[i][j].neighbors = [];
+        copyOfGrid[i][j].previous = undefined;
+        copyOfGrid[i][j].wall = false;
+        copyOfGrid[i][j].f = 0;
+        copyOfGrid[i][j].g = 0;
+        copyOfGrid[i][j].h = 0;
       }
     }
+
+    openSet = [];
+    closedSet = [];
+
     this.setState({
       grid: copyOfGrid
     });
+
+    this.componentDidMount();
   };
 
   drop = event => {
@@ -415,6 +427,8 @@ class AStar extends React.Component {
 export default AStar;
 
 // BUG LIST :
+
+// fix restart bug
 
 // Check bug in drop method where you set the end and start
 
