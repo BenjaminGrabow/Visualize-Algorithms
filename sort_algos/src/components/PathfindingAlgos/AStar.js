@@ -242,8 +242,11 @@ class AStar extends React.Component {
   };
 
   makeWall = e => {
-    console.log(e.target);
-    if (e.target.className !== "dragDrop") {
+    // console.log(e.target.className);
+    if (
+      e.target.className !== "dragDrop" &&
+      e.target.className.split(" ").length === 1
+    ) {
       // check the className because of drag and drop bug
       let copyOfGrid = [...this.state.grid];
       const clickedSpot = e.target.id.split(" ");
@@ -297,7 +300,7 @@ class AStar extends React.Component {
     if (data === "end") {
       end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
     } else {
-      openSet = [this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]]];
+      start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
     }
   };
 
@@ -340,10 +343,9 @@ class AStar extends React.Component {
                         >
                           <Draggable id="start" className="dragDrop">
                             <i
-                              className="dragDrop"
                               id="start1"
                               style={{ margin: "0", padding: "0" }}
-                              class="fa fa-play-circle"
+                              className="fa fa-play-circle dragDrop"
                             />
                           </Draggable>
                         </div>
@@ -363,10 +365,9 @@ class AStar extends React.Component {
                         >
                           <Draggable className="dragDrop" id="end">
                             <i
-                              className="dragDrop"
                               id="end1"
                               style={{ margin: "0", padding: "0" }}
-                              class="fa fa-bullseye"
+                              className="fa fa-bullseye dragDrop"
                             />
                           </Draggable>
                         </div>
