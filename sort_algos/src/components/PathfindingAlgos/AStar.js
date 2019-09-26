@@ -339,13 +339,12 @@ class AStar extends React.Component {
                           onDragOver={this.allowDrop}
                         >
                           <Draggable id="start" className="dragDrop">
-                            <p
+                            <i
                               className="dragDrop"
                               id="start1"
                               style={{ margin: "0", padding: "0" }}
-                            >
-                              S
-                            </p>
+                              class="fa fa-play-circle"
+                            />
                           </Draggable>
                         </div>
                       ) : element.end ? (
@@ -363,13 +362,12 @@ class AStar extends React.Component {
                           onDragOver={this.allowDrop}
                         >
                           <Draggable className="dragDrop" id="end">
-                            <p
+                            <i
                               className="dragDrop"
                               id="end1"
                               style={{ margin: "0", padding: "0" }}
-                            >
-                              E
-                            </p>
+                              class="fa fa-bullseye"
+                            />
                           </Draggable>
                         </div>
                       ) : (
@@ -391,7 +389,7 @@ class AStar extends React.Component {
                   );
                 });
                 return (
-                  <tr onClick={this.makeWall} className="box" key={i}>
+                  <tr onMouseOver={this.makeWall} className="box" key={i}>
                     {entry}
                   </tr>
                 );
