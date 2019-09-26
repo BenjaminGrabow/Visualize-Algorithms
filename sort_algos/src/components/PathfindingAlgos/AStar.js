@@ -154,6 +154,7 @@ class AStar extends React.Component {
   };
 
   start = () => {
+    console.log(end)
     // Am I still searching?
     if (openSet.length > 0) {
       // Best next option
@@ -271,28 +272,28 @@ class AStar extends React.Component {
   };
 
   restart = () => {
-    let copyOfGrid = [...this.state.grid];
+    // let copyOfGrid = [...this.state.grid];
 
-    for (let i = 0; i < copyOfGrid.length; i++) {
-      for (let j = 0; j < copyOfGrid.length; j++) {
-        copyOfGrid[i][j].backgroundColor = "white";
-        copyOfGrid[i][j].neighbors = [];
-        copyOfGrid[i][j].previous = undefined;
-        copyOfGrid[i][j].wall = false;
-        copyOfGrid[i][j].f = 0;
-        copyOfGrid[i][j].g = 0;
-        copyOfGrid[i][j].h = 0;
-      }
-    }
+    // for (let i = 0; i < copyOfGrid.length; i++) {
+    //   for (let j = 0; j < copyOfGrid.length; j++) {
+    //     copyOfGrid[i][j].backgroundColor = "white";
+    //     copyOfGrid[i][j].neighbors = [];
+    //     copyOfGrid[i][j].previous = undefined;
+    //     copyOfGrid[i][j].wall = false;
+    //     copyOfGrid[i][j].f = 0;
+    //     copyOfGrid[i][j].g = 0;
+    //     copyOfGrid[i][j].h = 0;
+    //   }
+    // }
 
     openSet = [];
     closedSet = [];
-
-    this.setState({
-      grid: copyOfGrid
-    });
-
-    this.componentDidMount();
+    current = null;
+    grid = new Array(cols);
+    // this.setState({
+    //   grid: copyOfGrid
+    // });
+this.componentDidMount();
   };
 
   drop = event => {
@@ -431,7 +432,7 @@ export default AStar;
 
 // BUG LIST :
 
-// fix bug for start and end in Spot constructor 
+// fix bug for start and end in Spot constructor
 
 // fix restart bug
 
