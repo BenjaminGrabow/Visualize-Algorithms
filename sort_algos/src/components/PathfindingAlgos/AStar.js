@@ -165,6 +165,10 @@ class AStar extends React.Component {
         }
       }
       current = openSet[winner];
+// START AND RESTART BUG :
+
+// CONNECT EVERY VARIABLE (ALSO SPOT CONSTUCTOR) WITH COMPONENT STATE
+// ADD IN ALL METHODS THE SETSTATE FOR THE NEW CREATED COMPONENT STATES
 
       // Did I finish?
       if (current === end) {
