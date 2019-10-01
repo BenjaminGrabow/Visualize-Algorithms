@@ -433,6 +433,9 @@ this.componentDidMount();
 }
 
 export default AStar;
+// FEATURES : 
+
+// ADD DIAGONAL NEIGHBORS
 
 // BUG LIST :
 
