@@ -439,9 +439,11 @@ export default AStar;
 
 // BUG LIST :
 
-// fix bug for start and end in Spot constructor
+// fix restart bug: ADD ALL global variables to component state
+// also constructor function Spot
+// refactor method calls where global vars get changed to setState
 
-// fix restart bug
+// fix bug for start and end in Spot constructor
 
 // Check bug in drop method where you set the end and start
 
