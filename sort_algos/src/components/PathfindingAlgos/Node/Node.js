@@ -6,7 +6,9 @@ class Node extends React.Component {
     this.state = {  }
   }
   render() { 
-    return (  );
+    return ( <div className="node">
+
+    </div> );
   }
 }
  
