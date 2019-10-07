@@ -21,6 +21,8 @@ class PathfindingVisualizer extends React.Component {
   };
 
   render() { 
+    const {nodes} = this.state;
+    console.log(nodes)
     return (  );
   }
 }
