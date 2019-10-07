@@ -23,7 +23,15 @@ class PathfindingVisualizer extends React.Component {
   render() { 
     const {nodes} = this.state;
     console.log(nodes)
-    return (  );
+    return ( 
+      <div className="grid">
+        {nodes.map((row, rowIndex) => {
+          return <div>
+            {row.map((node, nodeIndex) => <Node/>)}
+            </div>
+        })}
+      </div>
+     );
   }
 }
  
