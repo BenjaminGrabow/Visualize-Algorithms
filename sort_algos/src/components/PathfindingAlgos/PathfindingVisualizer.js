@@ -1,4 +1,5 @@
 import React from 'react';
+import Node from './Node/Node';
 
 class PathfindingVisualizer extends React.Component {
   constructor(props) {
