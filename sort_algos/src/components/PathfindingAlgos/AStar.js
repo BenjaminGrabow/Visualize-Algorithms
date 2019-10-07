@@ -9,19 +9,19 @@ const StyledAStar = styled.div`
     border: 0.1rem solid #3f51b5;
     width: 2rem;
     height: 2rem;
-    border-radius: 50%;
+    /* border-radius: 50%; */
   }
 `;
 
 // Function to delete element from the array
-function removeFromArray(arr, elt) {
+const removeFromArray = (arr, elt) => {
   // Could use indexOf here instead to be more efficient
   for (let i = arr.length - 1; i >= 0; i--) {
     if (arr[i] === elt) {
       arr.splice(i, 1);
     }
   }
-}
+};
 
 // An educated guess of how far it is between two points
 function heuristic(a, b) {
@@ -56,6 +56,7 @@ function Spot(i, j) {
   this.addNeighbors = function(grid) {
     let i = this.i;
     let j = this.j;
+    // Add diagonal !!!
     if (i < cols - 1) {
       this.neighbors.push(grid[i + 1][j]);
     }
@@ -147,14 +148,12 @@ class AStar extends React.Component {
     // openSet starts with beginning only
     openSet.push(start);
 
-    console.log(grid);
     this.setState({
       grid: grid
     });
   };
 
   start = () => {
-    console.log(end)
     // Am I still searching?
     if (openSet.length > 0) {
       // Best next option
@@ -165,10 +164,10 @@ class AStar extends React.Component {
         }
       }
       current = openSet[winner];
-// START AND RESTART BUG :
+      // START AND RESTART BUG :
 
-// CONNECT EVERY VARIABLE (ALSO SPOT CONSTUCTOR) WITH COMPONENT STATE
-// ADD IN ALL METHODS THE SETSTATE FOR THE NEW CREATED COMPONENT STATES
+      // CONNECT EVERY VARIABLE (ALSO SPOT CONSTUCTOR) WITH COMPONENT STATE
+      // ADD IN ALL METHODS THE SETSTATE FOR THE NEW CREATED COMPONENT STATES
 
       // Did I finish?
       if (current === end) {
@@ -297,7 +296,7 @@ class AStar extends React.Component {
     // this.setState({
     //   grid: copyOfGrid
     // });
-this.componentDidMount();
+    this.componentDidMount();
   };
 
   drop = event => {
@@ -433,7 +432,7 @@ this.componentDidMount();
 }
 
 export default AStar;
-// FEATURES : 
+// FEATURES :
 
 // ADD DIAGONAL NEIGHBORS
 
