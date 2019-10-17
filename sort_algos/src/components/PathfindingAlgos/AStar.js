@@ -6,7 +6,7 @@ import styled from "styled-components";
 const StyledAStar = styled.div`
   display: flex;
 
-  .box {
+  .node {
     border: 0.1rem solid #3f51b5;
     width: 2rem;
     height: 2rem;
@@ -150,7 +150,6 @@ export default class AStar extends React.Component {
     //   // check the className because of drag and drop bug
     //   let copyOfGrid = [...this.state.grid];
     //   const clickedSpot = e.target.id.split(" ");
-
     //   if (
     //     copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
     //   ) {
@@ -164,7 +163,6 @@ export default class AStar extends React.Component {
     //     });
     //   }
     // }
-
   };
 
   restart = () => {
@@ -195,31 +193,25 @@ export default class AStar extends React.Component {
   render() {
     return (
       <StyledAStar>
-        {/* actual grid */}
+        {/* grid */}
         {this.state.grid ? (
           <table className="table-hover table-striped table-bordered">
             <tbody>
               {this.state.grid.map((item, i) => {
                 let entry = item.map((element, j) => {
                   return (
-                    <td
-                    id={`${element.i} ${element.j}`}
-                      className="box"
-                      style={{
-                        backgroundColor: `${
-                          element.wall ? "black" : element.backgroundColor
-                        }`
-                      }}
+                    <Node
                       key={j}
-                      >
-                     <Node start={element.start} end={element.end} 
-                    //  id={element}
-                     />
-                    </td>
+                      id={`${element.i} ${element.j}`}
+                      start={element.start}
+                      end={element.end}
+                      wall={element.wall}
+                      backgroundColor={element.backgroundColor}
+                    />
                   );
                 });
                 return (
-                  <tr onMouseOver={this.makeWall} className="box" key={i}>
+                  <tr onMouseOver={this.makeWall} key={i}>
                     {entry}
                   </tr>
                 );
@@ -231,19 +223,19 @@ export default class AStar extends React.Component {
         <div className="setting-legend">
           <div className="legend-item">
             <p>Wall</p>
-            <div className="box" style={{ backgroundColor: "black" }} />
+            <div className="node" style={{ backgroundColor: "black" }} />
           </div>
           <div className="legend-item">
             <p>Unvisited</p>
-            <div className="box" />
+            <div className="node" />
           </div>
           <div className="legend-item">
             <p>Visited</p>
-            <div className="box" style={{ backgroundColor: "red" }} />
+            <div className="node" style={{ backgroundColor: "red" }} />
           </div>
           <div className="legend-item">
             <p>Next possible move</p>
-            <div className="box" style={{ backgroundColor: "yellow" }} />
+            <div className="node" style={{ backgroundColor: "yellow" }} />
           </div>
           <button onClick={this.start}>Start</button>
           <button onClick={this.restart}>Restart</button>

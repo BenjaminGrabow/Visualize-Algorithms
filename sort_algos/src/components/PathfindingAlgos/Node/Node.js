@@ -2,10 +2,16 @@ import React from "react";
 
 class Node extends React.Component {
   render() {
-    const { start, end, id } = this.props;
+    const { start, end, id, wall, backgroundColor } = this.props;
 
     return (
-      <td className="node" id={id}>
+      <td
+        style={{
+          backgroundColor: `${wall ? "black" : backgroundColor}`
+        }}
+        className="node"
+        id={id}
+      >
         {start ? (
           <i
             id="start1"
@@ -89,7 +95,6 @@ export default Node;
 //                         />
 //                       )} */}
 
-
 // From second Change
 
 // <td
@@ -102,7 +107,7 @@ export default Node;
 //                       }}
 //                       key={j}
 //                       >
-//                      <Node start={element.start} end={element.end} 
+//                      <Node start={element.start} end={element.end}
 //                     //  id={element}
 //                      />
 //                     </td>
