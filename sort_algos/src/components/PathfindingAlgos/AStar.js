@@ -12,7 +12,6 @@ const StyledAStar = styled.div`
     height: 2rem;
     /* border-radius: 50%; */
   }
-
 `;
 
 export default class AStar extends React.Component {
@@ -192,24 +191,29 @@ export default class AStar extends React.Component {
   //   event.preventDefault();
   // };
 
-
-
   // Onmousedown => OnmouseEnter => Onmouseup
   onMouseDown = (i, j) => {
-  const changedGrid = makeNodeToWall(this.state.grid, i, j);
-  this.setState({
-    grid: changedGrid,
-    mouseIsPressed: true,
-  });
-};
+    const changedGrid = makeNodeToWall(this.state.grid, i, j);
+    this.setState({
+      grid: changedGrid,
+      mouseIsPressed: true
+    });
+  };
 
   onMouseEnter = (i, j) => {
-    
-  }
+    if (!this.state.mouseIsPressed) return;
+    const changedGrid = makeNodeToWall(this.state.grid, i, j);
+    this.setState({
+      grid: changedGrid
+    });
+  };
 
   onMouseUp = () => {
-    
-  }
+    this.setState({
+      mouseIsPressed: false
+    });
+  };
+  
   render() {
     return (
       <StyledAStar>
@@ -228,7 +232,9 @@ export default class AStar extends React.Component {
                       wall={element.wall}
                       backgroundColor={element.backgroundColor}
                       onMouseDown={() => this.onMouseDown(element.i, element.j)}
-                      onMouseEnter={() => this.onMouseDown(element.i, element.j)}
+                      onMouseEnter={() =>
+                        this.onMouseDown(element.i, element.j)
+                      }
                       onMouseUp={this.onMouseUp}
                     />
                   );
