@@ -19,7 +19,8 @@ export default class AStar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grid: null
+      grid: null,
+      mouseIsPressed: false
     };
   }
 
@@ -194,6 +195,17 @@ export default class AStar extends React.Component {
 
 
   // Onmousedown => OnmouseEnter => Onmouseup
+  onMouseDown = (i, j) => {
+  
+  }
+
+  onMouseEnter = (i, j) => {
+    
+  }
+
+  onMouseUp = () => {
+    
+  }
   render() {
     return (
       <StyledAStar>
