@@ -432,22 +432,81 @@ export default class AStar extends React.Component {
   }
 }
 
+
+// i stands for row and j for col
 const createInitialGrid = () => {
   grid = []; // create empty main array for grid
   for (let i = 0; i < rows; i++) {
     currentRow = []; // create empty row
-    for (let j = 0; j < col; j++) {
-      currentRow.push(createNode(row, col)); // push every row fill with the coll for current row
-    }
+    for (let j = 0; j < cols; j++) {
+      currentRow.push(createNode(i, j)); // push every row fill with the coll for current row
+    } 
     grip.push(currentRow); // after first row is filled push the filled array(row with the cols) to the main array (grid)
   }
 };
 
-const createNode = (row, col) => {
+const createNode = (i, j) => {
   return {
-    
+row: row,
+col: col,
+start: i === 0 && j === 0 ? true : false,
+end: i === cols - 1 && j === rows - 1 ? true : false,
+neighbors: [],
+addAllNeighbors: addAllNeighbors,
+previous: undefined,
+isWall: false,
+f: 0,
+g: 0,
+h: 0,
+backgroundColor: "white"
   };
 };
+
+const addAllNeighbors = (grid, i, j) => {
+ 
+};
+
+function Spot(i, j) {
+  // Location
+  this.i = i;
+  this.j = j;
+
+  // f, g, and h values for A*
+  this.f = 0; // h + g = f;
+  this.g = 0; // from current field to this field
+  this.h = 0; // from this field to the end field
+  this.start = i === 0 && j === 0 ? true : false; // top left corner
+  this.end = i === cols - 1 && j === rows - 1 ? true : false; //bottom right corner
+  this.backgroundColor = "white";
+
+  // Neighbors
+  this.neighbors = [];
+
+  // Where did I come from?
+  this.previous = undefined;
+
+  // // Am I a wall?
+  this.wall = false; // Obstacle => wall
+
+  // Figure out who my neighbors are
+  this.addNeighbors = function(grid, i, j) {
+    let i = this.i;
+    let j = this.j;
+    // Add diagonal !!!
+    if (i < cols - 1) {
+      this.neighbors.push(grid[i + 1][j]);
+    }
+    if (i > 0) {
+      this.neighbors.push(grid[i - 1][j]);
+    }
+    if (j < rows - 1) {
+      this.neighbors.push(grid[i][j + 1]);
+    }
+    if (j > 0) {
+      this.neighbors.push(grid[i][j - 1]);
+    }
+  };
+}
 
 // FEATURES :
 
