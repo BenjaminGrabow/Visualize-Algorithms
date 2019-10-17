@@ -30,54 +30,54 @@ function heuristic(a, b) {
 }
 
 // An object to describe a spot in the grid
-function Spot(i, j) {
-  // Location
-  this.i = i;
-  this.j = j;
+// function Spot(i, j) {
+//   // Location
+//   this.i = i;
+//   this.j = j;
 
-  // f, g, and h values for A*
-  this.f = 0; // h + g = f;
-  this.g = 0; // from current field to this field
-  this.h = 0; // from this field to the end field
-  this.start = i === 0 && j === 0 ? true : false; // top left corner
-  this.end = i === cols - 1 && j === rows - 1 ? true : false; //bottom right corner
-  this.backgroundColor = "white";
+//   // f, g, and h values for A*
+//   this.f = 0; // h + g = f;
+//   this.g = 0; // from current field to this field
+//   this.h = 0; // from this field to the end field
+//   this.start = i === 0 && j === 0 ? true : false; // top left corner
+//   this.end = i === cols - 1 && j === rows - 1 ? true : false; //bottom right corner
+//   this.backgroundColor = "white";
 
-  // Neighbors
-  this.neighbors = [];
+//   // Neighbors
+//   this.neighbors = [];
 
-  // Where did I come from?
-  this.previous = undefined;
+//   // Where did I come from?
+//   this.previous = undefined;
 
-  // // Am I a wall?
-  this.wall = false; // Obstacle => wall
+//   // // Am I a wall?
+//   this.wall = false; // Obstacle => wall
 
-  // Figure out who my neighbors are
-  this.addNeighbors = function(grid) {
-    let i = this.i;
-    let j = this.j;
-    // Add diagonal !!!
-    if (i < cols - 1) {
-      this.neighbors.push(grid[i + 1][j]);
-    }
-    if (i > 0) {
-      this.neighbors.push(grid[i - 1][j]);
-    }
-    if (j < rows - 1) {
-      this.neighbors.push(grid[i][j + 1]);
-    }
-    if (j > 0) {
-      this.neighbors.push(grid[i][j - 1]);
-    }
-  };
-}
+//   // Figure out who my neighbors are
+//   this.addNeighbors = function(grid) {
+//     let i = this.i;
+//     let j = this.j;
+//     // Add diagonal !!!
+//     if (i < cols - 1) {
+//       this.neighbors.push(grid[i + 1][j]);
+//     }
+//     if (i > 0) {
+//       this.neighbors.push(grid[i - 1][j]);
+//     }
+//     if (j < rows - 1) {
+//       this.neighbors.push(grid[i][j + 1]);
+//     }
+//     if (j > 0) {
+//       this.neighbors.push(grid[i][j - 1]);
+//     }
+//   };
+// }
 
 // columns and rows
 let cols = 20;
 let rows = 20;
 
 // This will be the 2D array
-let grid = new Array(cols);
+// let grid = new Array(cols);
 
 // Open and closed set
 let openSet = [];
@@ -98,41 +98,26 @@ export default class AStar extends React.Component {
   }
 
   componentDidMount = () => {
-    // Other way of doing 2D Array:
-    // let grid = [];
-    // let rows = 10;
-    // let columns = 10;
-    // let counter = 0;
 
-    // const fill2DimensionsArray = (arr, rows, columns) => {
-    //   for (let i = 0; i < rows; i++) {
-    //     arr.push([counter]);
-    //     for (let j = 0; j < columns; j++) {
-    //       arr[i][j] = counter;
-    //     counter += 1;
-    //     }
+    // // Making a 2D array
+    // for (let i = 0; i < cols; i++) {
+    //   grid[i] = new Array(rows);
+    // }
+
+    // for (let i = 0; i < cols; i++) {
+    //   for (let j = 0; j < rows; j++) {
+    //     grid[i][j] = new Spot(i, j);
     //   }
     // }
 
-    // fill2DimensionsArray(grid, rows, columns);
+    // // All the neighbors
+    // for (let i = 0; i < cols; i++) {
+    //   for (let j = 0; j < rows; j++) {
+    //     grid[i][j].addNeighbors(grid);
+    //   }
+    // }
 
-    // Making a 2D array
-    for (let i = 0; i < cols; i++) {
-      grid[i] = new Array(rows);
-    }
-
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        grid[i][j] = new Spot(i, j);
-      }
-    }
-
-    // All the neighbors
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        grid[i][j].addNeighbors(grid);
-      }
-    }
+    grid = createInitialGrid();
 
     //start and end
     if (!start) {
@@ -433,26 +418,38 @@ export default class AStar extends React.Component {
 }
 
 
+let grid = []; // create empty main array for grid
+
 // i stands for row and j for col
 const createInitialGrid = () => {
-  grid = []; // create empty main array for grid
   for (let i = 0; i < rows; i++) {
-    currentRow = []; // create empty row
+    let currentRow = []; // create empty row
     for (let j = 0; j < cols; j++) {
       currentRow.push(createNode(i, j)); // push every row fill with the coll for current row
     } 
-    grip.push(currentRow); // after first row is filled push the filled array(row with the cols) to the main array (grid)
+    grid.push(currentRow); // after first row is filled push the filled array(row with the cols) to the main array (grid)
   }
+  
+  // add all neighbors to all Nodes => to the key neighbors(which is an array)
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+    addAllNeighbors(i, j);
+    } 
+  }
+
+  return grid;
 };
 
 const createNode = (i, j) => {
+  // create a node with all key value pairs we need like 
+  // row (i) and col (j) , if start or end node , which neighbors we have (in array)
+  // the f, g , h value, the color
   return {
-row: row,
-col: col,
+i: i,
+i: j,
 start: i === 0 && j === 0 ? true : false,
 end: i === cols - 1 && j === rows - 1 ? true : false,
 neighbors: [],
-addAllNeighbors: addAllNeighbors,
 previous: undefined,
 isWall: false,
 f: 0,
@@ -462,51 +459,23 @@ backgroundColor: "white"
   };
 };
 
-const addAllNeighbors = (grid, i, j) => {
- 
+const addAllNeighbors = (i, j) => {
+  // check rows and cols and if valid add it as neighbor to our
+  // grid => a check if the grid node is a neighbor is not implemented 
+  // at this point
+ if (i < cols - 1) {
+  grid[i][j].neighbors.push(grid[i + 1][j]);
+ }
+ if ( i > 0) {
+  grid[i][j].neighbors.push(grid[i - 1][j]); 
+ }
+ if (j < rows - 1) {
+  grid[i][j].neighbors.push(grid[i][j + 1]);  
+ }
+ if (j > 0) {
+  grid[i][j].neighbors.push(grid[i][j - 1]);  
+ }
 };
-
-function Spot(i, j) {
-  // Location
-  this.i = i;
-  this.j = j;
-
-  // f, g, and h values for A*
-  this.f = 0; // h + g = f;
-  this.g = 0; // from current field to this field
-  this.h = 0; // from this field to the end field
-  this.start = i === 0 && j === 0 ? true : false; // top left corner
-  this.end = i === cols - 1 && j === rows - 1 ? true : false; //bottom right corner
-  this.backgroundColor = "white";
-
-  // Neighbors
-  this.neighbors = [];
-
-  // Where did I come from?
-  this.previous = undefined;
-
-  // // Am I a wall?
-  this.wall = false; // Obstacle => wall
-
-  // Figure out who my neighbors are
-  this.addNeighbors = function(grid, i, j) {
-    let i = this.i;
-    let j = this.j;
-    // Add diagonal !!!
-    if (i < cols - 1) {
-      this.neighbors.push(grid[i + 1][j]);
-    }
-    if (i > 0) {
-      this.neighbors.push(grid[i - 1][j]);
-    }
-    if (j < rows - 1) {
-      this.neighbors.push(grid[i][j + 1]);
-    }
-    if (j > 0) {
-      this.neighbors.push(grid[i][j - 1]);
-    }
-  };
-}
 
 // FEATURES :
 
