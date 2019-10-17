@@ -2,10 +2,22 @@ import React from "react";
 
 class Node extends React.Component {
   render() {
-    const { start, end, id, wall, backgroundColor } = this.props;
+    const {
+      start,
+      end,
+      id,
+      wall,
+      backgroundColor,
+      onMouseDown,
+      onMouseEnter,
+      onMouseUp
+    } = this.props;
 
     return (
       <td
+        onMouseDown={onMouseDown}
+        onMouseEnter={onMouseEnter}
+        onMouseUp={onMouseUp}
         style={{
           backgroundColor: `${wall ? "black" : backgroundColor}`
         }}

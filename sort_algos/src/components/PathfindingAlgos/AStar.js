@@ -12,6 +12,7 @@ const StyledAStar = styled.div`
     height: 2rem;
     /* border-radius: 50%; */
   }
+
 `;
 
 export default class AStar extends React.Component {
@@ -190,6 +191,9 @@ export default class AStar extends React.Component {
   //   event.preventDefault();
   // };
 
+
+
+  // Onmousedown => OnmouseEnter => Onmouseup
   render() {
     return (
       <StyledAStar>
