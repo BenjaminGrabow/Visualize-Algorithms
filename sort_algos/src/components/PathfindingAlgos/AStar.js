@@ -196,8 +196,12 @@ export default class AStar extends React.Component {
 
   // Onmousedown => OnmouseEnter => Onmouseup
   onMouseDown = (i, j) => {
-  
-  }
+  const changedGrid = makeNodeToWall(this.state.grid, i, j);
+  this.setState({
+    grid: changedGrid,
+    mouseIsPressed: true,
+  });
+};
 
   onMouseEnter = (i, j) => {
     
