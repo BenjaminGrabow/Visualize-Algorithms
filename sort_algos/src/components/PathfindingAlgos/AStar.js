@@ -89,7 +89,7 @@ let end;
 
 let current;
 
-class AStar extends React.Component {
+export default class AStar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -151,6 +151,7 @@ class AStar extends React.Component {
     this.setState({
       grid: grid
     });
+    console.log(grid);
   };
 
   start = () => {
@@ -431,7 +432,23 @@ class AStar extends React.Component {
   }
 }
 
-export default AStar;
+const createInitialGrid = () => {
+  grid = []; // create empty main array for grid
+  for (let i = 0; i < rows; i++) {
+    currentRow = []; // create empty row
+    for (let j = 0; j < col; j++) {
+      currentRow.push(createNode(row, col)); // push every row fill with the coll for current row
+    }
+    grip.push(currentRow); // after first row is filled push the filled array(row with the cols) to the main array (grid)
+  }
+};
+
+const createNode = (row, col) => {
+  return {
+    
+  };
+};
+
 // FEATURES :
 
 // ADD DIAGONAL NEIGHBORS
