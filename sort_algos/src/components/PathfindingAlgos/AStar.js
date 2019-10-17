@@ -29,49 +29,6 @@ function heuristic(a, b) {
   return d;
 }
 
-// An object to describe a spot in the grid
-// function Spot(i, j) {
-//   // Location
-//   this.i = i;
-//   this.j = j;
-
-//   // f, g, and h values for A*
-//   this.f = 0; // h + g = f;
-//   this.g = 0; // from current field to this field
-//   this.h = 0; // from this field to the end field
-//   this.start = i === 0 && j === 0 ? true : false; // top left corner
-//   this.end = i === cols - 1 && j === rows - 1 ? true : false; //bottom right corner
-//   this.backgroundColor = "white";
-
-//   // Neighbors
-//   this.neighbors = [];
-
-//   // Where did I come from?
-//   this.previous = undefined;
-
-//   // // Am I a wall?
-//   this.wall = false; // Obstacle => wall
-
-//   // Figure out who my neighbors are
-//   this.addNeighbors = function(grid) {
-//     let i = this.i;
-//     let j = this.j;
-//     // Add diagonal !!!
-//     if (i < cols - 1) {
-//       this.neighbors.push(grid[i + 1][j]);
-//     }
-//     if (i > 0) {
-//       this.neighbors.push(grid[i - 1][j]);
-//     }
-//     if (j < rows - 1) {
-//       this.neighbors.push(grid[i][j + 1]);
-//     }
-//     if (j > 0) {
-//       this.neighbors.push(grid[i][j - 1]);
-//     }
-//   };
-// }
-
 // columns and rows
 let cols = 20;
 let rows = 20;
@@ -98,24 +55,6 @@ export default class AStar extends React.Component {
   }
 
   componentDidMount = () => {
-
-    // // Making a 2D array
-    // for (let i = 0; i < cols; i++) {
-    //   grid[i] = new Array(rows);
-    // }
-
-    // for (let i = 0; i < cols; i++) {
-    //   for (let j = 0; j < rows; j++) {
-    //     grid[i][j] = new Spot(i, j);
-    //   }
-    // }
-
-    // // All the neighbors
-    // for (let i = 0; i < cols; i++) {
-    //   for (let j = 0; j < rows; j++) {
-    //     grid[i][j].addNeighbors(grid);
-    //   }
-    // }
 
     grid = createInitialGrid();
 
@@ -261,27 +200,10 @@ export default class AStar extends React.Component {
   };
 
   restart = () => {
-    // let copyOfGrid = [...this.state.grid];
-
-    // for (let i = 0; i < copyOfGrid.length; i++) {
-    //   for (let j = 0; j < copyOfGrid.length; j++) {
-    //     copyOfGrid[i][j].backgroundColor = "white";
-    //     copyOfGrid[i][j].neighbors = [];
-    //     copyOfGrid[i][j].previous = undefined;
-    //     copyOfGrid[i][j].wall = false;
-    //     copyOfGrid[i][j].f = 0;
-    //     copyOfGrid[i][j].g = 0;
-    //     copyOfGrid[i][j].h = 0;
-    //   }
-    // }
-
     openSet = [];
     closedSet = [];
     current = null;
-    grid = new Array(cols);
-    // this.setState({
-    //   grid: copyOfGrid
-    // });
+    
     this.componentDidMount();
   };
 
@@ -422,6 +344,7 @@ let grid = []; // create empty main array for grid
 
 // i stands for row and j for col
 const createInitialGrid = () => {
+  grid = [];
   for (let i = 0; i < rows; i++) {
     let currentRow = []; // create empty row
     for (let j = 0; j < cols; j++) {
@@ -446,15 +369,16 @@ const createNode = (i, j) => {
   // the f, g , h value, the color
   return {
 i: i,
-i: j,
-start: i === 0 && j === 0 ? true : false,
-end: i === cols - 1 && j === rows - 1 ? true : false,
+j: j,
+start: i === 0 && j === 0,
+end: i === cols - 1 && j === rows - 1,
 neighbors: [],
 previous: undefined,
 isWall: false,
-f: 0,
-g: 0,
-h: 0,
+// f, g, and h values for A*
+f: 0, // h + g = f;
+g: 0, // from current field to this field
+h: 0, // from this field to the end field (educated guess)
 backgroundColor: "white"
   };
 };
@@ -476,6 +400,12 @@ const addAllNeighbors = (i, j) => {
   grid[i][j].neighbors.push(grid[i][j - 1]);  
  }
 };
+
+
+
+
+
+
 
 // FEATURES :
 
