@@ -1,7 +1,7 @@
 import React from "react";
 import Node from "./Node/Node";
 import styled from "styled-components";
-import Draggable from "./DragDrop/Draggable";
+// import Draggable from "./DragDrop/Draggable";
 
 const StyledAStar = styled.div`
   display: flex;
@@ -142,28 +142,29 @@ export default class AStar extends React.Component {
   };
 
   makeWall = e => {
-    // console.log(e.target.className);
-    if (
-      e.target.className !== "dragDrop" &&
-      e.target.className.split(" ").length === 1
-    ) {
-      // check the className because of drag and drop bug
-      let copyOfGrid = [...this.state.grid];
-      const clickedSpot = e.target.id.split(" ");
+    // // console.log(e.target.className);
+    // if (
+    //   e.target.className !== "dragDrop" &&
+    //   e.target.className.split(" ").length === 1
+    // ) {
+    //   // check the className because of drag and drop bug
+    //   let copyOfGrid = [...this.state.grid];
+    //   const clickedSpot = e.target.id.split(" ");
 
-      if (
-        copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
-      ) {
-        if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
-          copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
-        } else {
-          copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
-        }
-        this.setState({
-          grid: copyOfGrid
-        });
-      }
-    }
+    //   if (
+    //     copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
+    //   ) {
+    //     if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
+    //       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
+    //     } else {
+    //       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
+    //     }
+    //     this.setState({
+    //       grid: copyOfGrid
+    //     });
+    //   }
+    // }
+
   };
 
   restart = () => {
@@ -174,22 +175,22 @@ export default class AStar extends React.Component {
     this.componentDidMount();
   };
 
-  drop = event => {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("transfer");
-    event.target.append(document.getElementById(data));
-    const changeStartOrEnd = event.target.parentNode.id.split(" ");
+  // drop = event => {
+  //   event.preventDefault();
+  //   const data = event.dataTransfer.getData("transfer");
+  //   event.target.append(document.getElementById(data));
+  //   const changeStartOrEnd = event.target.parentNode.id.split(" ");
 
-    if (data === "end") {
-      end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
-    } else {
-      start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
-    }
-  };
+  //   if (data === "end") {
+  //     end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
+  //   } else {
+  //     start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
+  //   }
+  // };
 
-  allowDrop = event => {
-    event.preventDefault();
-  };
+  // allowDrop = event => {
+  //   event.preventDefault();
+  // };
 
   render() {
     return (
@@ -202,15 +203,15 @@ export default class AStar extends React.Component {
                 let entry = item.map((element, j) => {
                   return (
                     <td
+                    id={`${element.i} ${element.j}`}
                       className="box"
-                      id={`${element.i} ${element.j}`}
                       style={{
                         backgroundColor: `${
                           element.wall ? "black" : element.backgroundColor
                         }`
                       }}
                       key={j}
-                    >
+                      >
                      <Node start={element.start} end={element.end} 
                     //  id={element}
                      />

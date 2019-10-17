@@ -5,7 +5,7 @@ class Node extends React.Component {
     const { start, end, id } = this.props;
 
     return (
-      <div className="node" id={id}>
+      <td className="node" id={id}>
         {start ? (
           <i
             id="start1"
@@ -19,7 +19,7 @@ class Node extends React.Component {
             className="fa fa-bullseye dragDrop"
           />
         ) : null}
-      </div>
+      </td>
     );
   }
 }
@@ -88,3 +88,21 @@ export default Node;
 //                           onDragOver={this.allowDrop}
 //                         />
 //                       )} */}
+
+
+// From second Change
+
+// <td
+//                     id={`${element.i} ${element.j}`}
+//                       className="box"
+//                       style={{
+//                         backgroundColor: `${
+//                           element.wall ? "black" : element.backgroundColor
+//                         }`
+//                       }}
+//                       key={j}
+//                       >
+//                      <Node start={element.start} end={element.end} 
+//                     //  id={element}
+//                      />
+//                     </td>
