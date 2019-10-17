@@ -211,6 +211,9 @@ export default class AStar extends React.Component {
                       end={element.end}
                       wall={element.wall}
                       backgroundColor={element.backgroundColor}
+                      onMouseDown={() => this.onMouseDown(element.i, element.j)}
+                      onMouseEnter={() => this.onMouseDown(element.i, element.j)}
+                      onMouseUp={this.onMouseUp}
                     />
                   );
                 });
