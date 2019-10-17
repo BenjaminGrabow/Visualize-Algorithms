@@ -1,11 +1,9 @@
 import React from 'react';
 
 class Node extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {  }
-  }
   render() { 
+    const { start, end, id } = this.props;
+
     return ( <div className="node">
 
     </div> );

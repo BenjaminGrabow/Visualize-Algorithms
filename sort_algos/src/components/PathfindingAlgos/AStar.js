@@ -13,7 +13,6 @@ const StyledAStar = styled.div`
   }
 `;
 
-
 export default class AStar extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +22,6 @@ export default class AStar extends React.Component {
   }
 
   componentDidMount = () => {
-    
     grid = createInitialGrid();
 
     //start and end
@@ -33,10 +31,10 @@ export default class AStar extends React.Component {
     if (!end) {
       end = grid[cols - 1][rows - 1];
     }
-    
+
     start.wall = false;
     end.wall = false;
-    
+
     // openSet starts with beginning only
     openSet.push(start);
 
@@ -45,7 +43,7 @@ export default class AStar extends React.Component {
     });
     console.log(grid);
   };
-  
+
   start = () => {
     // Am I still searching?
     if (openSet.length > 0) {
@@ -90,7 +88,7 @@ export default class AStar extends React.Component {
       let neighbors = current.neighbors;
       for (let i = 0; i < neighbors.length; i++) {
         let neighbor = neighbors[i];
-        
+
         // Valid next spot?
         if (!closedSet.includes(neighbor) && !neighbor.wall) {
           let tempG = current.g + heuristic(neighbor, current);
@@ -107,7 +105,7 @@ export default class AStar extends React.Component {
             newPath = true;
             openSet.push(neighbor);
           }
-          
+
           // Yes, it's a better path
           if (newPath) {
             neighbor.h = heuristic(neighbor, end);
@@ -124,11 +122,11 @@ export default class AStar extends React.Component {
 
     // animate the closed and open set
     let copyOfGrid = [...this.state.grid];
-    
+
     for (let i = 0; i < closedSet.length; i++) {
       copyOfGrid[closedSet[i].i][closedSet[i].j].backgroundColor = "red";
     }
-    
+
     for (let i = 0; i < openSet.length; i++) {
       copyOfGrid[openSet[i].i][openSet[i].j].backgroundColor = "yellow";
     }
@@ -147,11 +145,11 @@ export default class AStar extends React.Component {
     if (
       e.target.className !== "dragDrop" &&
       e.target.className.split(" ").length === 1
-      ) {
-        // check the className because of drag and drop bug
+    ) {
+      // check the className because of drag and drop bug
       let copyOfGrid = [...this.state.grid];
       const clickedSpot = e.target.id.split(" ");
-      
+
       if (
         copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
       ) {
@@ -171,7 +169,7 @@ export default class AStar extends React.Component {
     openSet = [];
     closedSet = [];
     current = null;
-    
+
     this.componentDidMount();
   };
 
@@ -187,7 +185,7 @@ export default class AStar extends React.Component {
       start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
     }
   };
-  
+
   allowDrop = event => {
     event.preventDefault();
   };
@@ -211,32 +209,11 @@ export default class AStar extends React.Component {
                         }`
                       }}
                       key={j}
-                      >
-                      {element.start ? (
+                    >
+                      {/* {
+                        element.start ? (
                         <div
-                        id="dr1"
-                        className="dragDrop"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            width: "1rem",
-                            height: "1rem"
-                          }}
-                          onDrop={this.drop}
-                          onDragOver={this.allowDrop}
-                          >
-                          <Draggable id="start" className="dragDrop">
-                            <i
-                              id="start1"
-                              style={{ margin: "0", padding: "0" }}
-                              className="fa fa-play-circle dragDrop"
-                              />
-                          </Draggable>
-                        </div>
-                      ) : element.end ? (
-                        <div
-                        id="dr2"
+                          id="dr1"
                           className="dragDrop"
                           style={{
                             display: "flex",
@@ -247,7 +224,29 @@ export default class AStar extends React.Component {
                           }}
                           onDrop={this.drop}
                           onDragOver={this.allowDrop}
-                          >
+                        >
+                          <Draggable id="start" className="dragDrop">
+                            <i
+                              id="start1"
+                              style={{ margin: "0", padding: "0" }}
+                              className="fa fa-play-circle dragDrop"
+                            />
+                          </Draggable>
+                        </div>
+                      ) : element.end ? (
+                        <div
+                          id="dr2"
+                          className="dragDrop"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "1rem",
+                            height: "1rem"
+                          }}
+                          onDrop={this.drop}
+                          onDragOver={this.allowDrop}
+                        >
                           <Draggable className="dragDrop" id="end">
                             <i
                               id="end1"
@@ -256,9 +255,10 @@ export default class AStar extends React.Component {
                             />
                           </Draggable>
                         </div>
-                      ) : (
+                      ) :
+                       (
                         <div
-                        id={`${element.i}${element.j}`}
+                          id={`${element.i}${element.j}`}
                           className="dragDrop"
                           style={{
                             display: "flex",
@@ -270,7 +270,7 @@ export default class AStar extends React.Component {
                           onDrop={this.drop}
                           onDragOver={this.allowDrop}
                         />
-                        )}
+                      )} */}
                     </td>
                   );
                 });
@@ -332,56 +332,56 @@ const createInitialGrid = () => {
     let currentRow = []; // create empty row
     for (let j = 0; j < cols; j++) {
       currentRow.push(createNode(i, j)); // push every row fill with the coll for current row
-    } 
+    }
     grid.push(currentRow); // after first row is filled push the filled array(row with the cols) to the main array (grid)
   }
-  
+
   // add all neighbors to all Nodes => to the key neighbors(which is an array)
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       addAllNeighbors(i, j);
-    } 
+    }
   }
-  
+
   return grid;
 };
 
-// create a node with all key value pairs we need like 
+// create a node with all key value pairs we need like
 // row (i) and col (j) , if start or end node , which neighbors we have (in array)
 // the f, g , h value, the color
 const createNode = (i, j) => {
   return {
     i: i,
-j: j,
-start: i === 0 && j === 0,
-end: i === cols - 1 && j === rows - 1,
-neighbors: [],
-previous: undefined,
-isWall: false,
-// f, g, and h values for A*
-f: 0, // h + g = f;
-g: 0, // from current field to this field
-h: 0, // from this field to the end field (educated guess)
-backgroundColor: "white"
+    j: j,
+    start: i === 0 && j === 0,
+    end: i === cols - 1 && j === rows - 1,
+    neighbors: [],
+    previous: undefined,
+    isWall: false,
+    // f, g, and h values for A*
+    f: 0, // h + g = f;
+    g: 0, // from current field to this field
+    h: 0, // from this field to the end field (educated guess)
+    backgroundColor: "white"
   };
 };
 
 const addAllNeighbors = (i, j) => {
   // check rows and cols and if valid add it as neighbor to our
-  // grid => a check if the grid node is a neighbor is not implemented 
+  // grid => a check if the grid node is a neighbor is not implemented
   // at this point
   if (i < cols - 1) {
     grid[i][j].neighbors.push(grid[i + 1][j]);
- }
- if ( i > 0) {
-   grid[i][j].neighbors.push(grid[i - 1][j]); 
- }
- if (j < rows - 1) {
-  grid[i][j].neighbors.push(grid[i][j + 1]);  
- }
- if (j > 0) {
-  grid[i][j].neighbors.push(grid[i][j - 1]);  
-}
+  }
+  if (i > 0) {
+    grid[i][j].neighbors.push(grid[i - 1][j]);
+  }
+  if (j < rows - 1) {
+    grid[i][j].neighbors.push(grid[i][j + 1]);
+  }
+  if (j > 0) {
+    grid[i][j].neighbors.push(grid[i][j - 1]);
+  }
 };
 
 // Function to delete element from the array
@@ -399,7 +399,6 @@ const heuristic = (a, b) => {
   let d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
   return d;
 };
-
 
 // FEATURES :
 
