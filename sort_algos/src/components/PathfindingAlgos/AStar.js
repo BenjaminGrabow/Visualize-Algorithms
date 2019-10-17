@@ -1,4 +1,5 @@
 import React from "react";
+import Node from "./Node/Node";
 import styled from "styled-components";
 import Draggable from "./DragDrop/Draggable";
 
@@ -210,67 +211,9 @@ export default class AStar extends React.Component {
                       }}
                       key={j}
                     >
-                      {/* {
-                        element.start ? (
-                        <div
-                          id="dr1"
-                          className="dragDrop"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            width: "1rem",
-                            height: "1rem"
-                          }}
-                          onDrop={this.drop}
-                          onDragOver={this.allowDrop}
-                        >
-                          <Draggable id="start" className="dragDrop">
-                            <i
-                              id="start1"
-                              style={{ margin: "0", padding: "0" }}
-                              className="fa fa-play-circle dragDrop"
-                            />
-                          </Draggable>
-                        </div>
-                      ) : element.end ? (
-                        <div
-                          id="dr2"
-                          className="dragDrop"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            width: "1rem",
-                            height: "1rem"
-                          }}
-                          onDrop={this.drop}
-                          onDragOver={this.allowDrop}
-                        >
-                          <Draggable className="dragDrop" id="end">
-                            <i
-                              id="end1"
-                              style={{ margin: "0", padding: "0" }}
-                              className="fa fa-bullseye dragDrop"
-                            />
-                          </Draggable>
-                        </div>
-                      ) :
-                       (
-                        <div
-                          id={`${element.i}${element.j}`}
-                          className="dragDrop"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            width: "1rem",
-                            height: "1rem"
-                          }}
-                          onDrop={this.drop}
-                          onDragOver={this.allowDrop}
-                        />
-                      )} */}
+                     <Node start={element.start} end={element.end} 
+                    //  id={element}
+                     />
                     </td>
                   );
                 });
