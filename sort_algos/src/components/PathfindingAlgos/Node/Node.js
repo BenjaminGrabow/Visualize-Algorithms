@@ -10,7 +10,7 @@ class Node extends React.Component {
       backgroundColor,
       onMouseDown,
       onMouseEnter,
-      onMouseUp
+      onMouseUp,
     } = this.props;
 
     return (

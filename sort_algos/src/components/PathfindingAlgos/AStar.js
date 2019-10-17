@@ -142,29 +142,29 @@ export default class AStar extends React.Component {
     // the the "DONE" statement gets triggered and we need a timeout to animate slowly
   };
 
-  makeWall = e => {
-    // // console.log(e.target.className);
-    // if (
-    //   e.target.className !== "dragDrop" &&
-    //   e.target.className.split(" ").length === 1
-    // ) {
-    //   // check the className because of drag and drop bug
-    //   let copyOfGrid = [...this.state.grid];
-    //   const clickedSpot = e.target.id.split(" ");
-    //   if (
-    //     copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
-    //   ) {
-    //     if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
-    //       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
-    //     } else {
-    //       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
-    //     }
-    //     this.setState({
-    //       grid: copyOfGrid
-    //     });
-    //   }
-    // }
-  };
+  // makeWall = e => {
+  //   // // console.log(e.target.className);
+  //   // if (
+  //   //   e.target.className !== "dragDrop" &&
+  //   //   e.target.className.split(" ").length === 1
+  //   // ) {
+  //   //   // check the className because of drag and drop bug
+  //   //   let copyOfGrid = [...this.state.grid];
+  //   //   const clickedSpot = e.target.id.split(" ");
+  //   //   if (
+  //   //     copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
+  //   //   ) {
+  //   //     if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
+  //   //       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
+  //   //     } else {
+  //   //       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
+  //   //     }
+  //   //     this.setState({
+  //   //       grid: copyOfGrid
+  //   //     });
+  //   //   }
+  //   // }
+  // };
 
   restart = () => {
     openSet = [];
@@ -191,7 +191,6 @@ export default class AStar extends React.Component {
   //   event.preventDefault();
   // };
 
-  // Onmousedown => OnmouseEnter => Onmouseup
   onMouseDown = (i, j) => {
     const changedGrid = makeNodeToWall(this.state.grid, i, j);
     this.setState({
@@ -213,7 +212,7 @@ export default class AStar extends React.Component {
       mouseIsPressed: false
     });
   };
-  
+
   render() {
     return (
       <StyledAStar>
@@ -231,16 +230,18 @@ export default class AStar extends React.Component {
                       end={element.end}
                       wall={element.wall}
                       backgroundColor={element.backgroundColor}
-                      onMouseDown={() => this.onMouseDown(element.i, element.j)}
-                      onMouseEnter={() =>
-                        this.onMouseDown(element.i, element.j)
-                      }
+                      onMouseDown={() => this.onMouseDown(i, j)}
+                      onMouseEnter={() => this.onMouseEnter(i, j)}
                       onMouseUp={this.onMouseUp}
+                      mouseIsPressed={this.state.mouseIsPressed}
                     />
                   );
                 });
                 return (
-                  <tr onMouseOver={this.makeWall} key={i}>
+                  <tr
+                    // onMouseOver={this.makeWall}
+                    key={i}
+                  >
                     {entry}
                   </tr>
                 );
@@ -347,6 +348,12 @@ const addAllNeighbors = (i, j) => {
   if (j > 0) {
     grid[i][j].neighbors.push(grid[i][j - 1]);
   }
+};
+
+// function to make a node to a wall
+const makeNodeToWall = (grid, i, j) => {
+  grid[i][j].wall = !grid[i][j].wall; 
+  return grid;
 };
 
 // Function to delete element from the array
