@@ -192,15 +192,22 @@ export default class AStar extends React.Component {
   // };
 
   onMouseDown = (i, j) => {
-    const changedGrid = makeNodeToWall(this.state.grid, i, j);
-    this.setState({
-      grid: changedGrid,
-      mouseIsPressed: true
-    });
+    if (!this.state.grid[i][j].start && !this.state.grid[i][j].end) {
+      const changedGrid = makeNodeToWall(this.state.grid, i, j);
+      this.setState({
+        grid: changedGrid,
+        mouseIsPressed: true
+      });
+    }
   };
 
   onMouseEnter = (i, j) => {
-    if (!this.state.mouseIsPressed) return;
+    if (
+      !this.state.mouseIsPressed ||
+      this.state.grid[i][j].start ||
+      this.state.grid[i][j].end
+    )
+      return;
     const changedGrid = makeNodeToWall(this.state.grid, i, j);
     this.setState({
       grid: changedGrid
@@ -233,7 +240,6 @@ export default class AStar extends React.Component {
                       onMouseDown={() => this.onMouseDown(i, j)}
                       onMouseEnter={() => this.onMouseEnter(i, j)}
                       onMouseUp={this.onMouseUp}
-                      mouseIsPressed={this.state.mouseIsPressed}
                     />
                   );
                 });
@@ -352,7 +358,7 @@ const addAllNeighbors = (i, j) => {
 
 // function to make a node to a wall
 const makeNodeToWall = (grid, i, j) => {
-  grid[i][j].wall = !grid[i][j].wall; 
+  grid[i][j].wall = !grid[i][j].wall;
   return grid;
 };
 
