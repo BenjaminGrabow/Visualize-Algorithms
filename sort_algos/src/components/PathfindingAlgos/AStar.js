@@ -37,16 +37,15 @@ export default class AStar extends React.Component {
     start.wall = false;
     end.wall = false;
 
-    
     this.setState({
       grid: grid
     });
   };
-  
+
   start = () => {
     // openSet starts with beginning only
     openSet.push(start);
-    this.beginStart()
+    this.beginStart();
   };
 
   beginStart = () => {
