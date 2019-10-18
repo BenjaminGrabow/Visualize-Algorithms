@@ -26,7 +26,7 @@ export default class AStar extends React.Component {
   componentDidMount = () => {
     grid = createInitialGrid();
 
-    //start and end
+    //start and end => check if start or end is already initialized
     if (!start) {
       start = grid[0][0];
     }
@@ -37,16 +37,19 @@ export default class AStar extends React.Component {
     start.wall = false;
     end.wall = false;
 
-    // openSet starts with beginning only
     
     this.setState({
       grid: grid
     });
-    console.log(grid);
   };
   
   start = () => {
+    // openSet starts with beginning only
     openSet.push(start);
+    this.beginStart()
+  };
+
+  beginStart = () => {
     // Am I still searching?
     if (openSet.length > 0) {
       // Best next option
@@ -137,34 +140,10 @@ export default class AStar extends React.Component {
       grid: copyOfGrid
     });
 
-    setTimeout(() => this.start(), 50); // because its no while loop we only check for one
+    setTimeout(() => this.beginStart(), 50); // because its no while loop we only check for one
     //move  with this method call and must call it again until
     // the the "DONE" statement gets triggered and we need a timeout to animate slowly
   };
-
-  // makeWall = e => {
-  //   // // console.log(e.target.className);
-  //   // if (
-  //   //   e.target.className !== "dragDrop" &&
-  //   //   e.target.className.split(" ").length === 1
-  //   // ) {
-  //   //   // check the className because of drag and drop bug
-  //   //   let copyOfGrid = [...this.state.grid];
-  //   //   const clickedSpot = e.target.id.split(" ");
-  //   //   if (
-  //   //     copyOfGrid[clickedSpot[0]][clickedSpot[1]].backgroundColor === "white"
-  //   //   ) {
-  //   //     if (copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall) {
-  //   //       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = false;
-  //   //     } else {
-  //   //       copyOfGrid[clickedSpot[0]][clickedSpot[1]].wall = true;
-  //   //     }
-  //   //     this.setState({
-  //   //       grid: copyOfGrid
-  //   //     });
-  //   //   }
-  //   // }
-  // };
 
   restart = () => {
     openSet = [];
@@ -174,7 +153,6 @@ export default class AStar extends React.Component {
     this.componentDidMount();
   };
 
-  
   onMouseDown = (i, j) => {
     // check if node is not start and end
     if (!this.state.grid[i][j].start && !this.state.grid[i][j].end) {
@@ -185,48 +163,48 @@ export default class AStar extends React.Component {
       });
     }
   };
-  
+
   onMouseEnter = (i, j) => {
     // check if mouse is pressed / start or end
     if (
       !this.state.mouseIsPressed ||
       this.state.grid[i][j].start ||
       this.state.grid[i][j].end
-      )
+    )
       return;
-      const changedGrid = makeNodeToWall(this.state.grid, i, j);
-      this.setState({
-        grid: changedGrid
-      });
-    };
-    
-    onMouseUp = () => {
-      this.setState({
-        mouseIsPressed: false
-      });
-    };
-    
-    onDrop = event => {
-      event.preventDefault();
-      const data = event.dataTransfer.getData("transfer");
-      event.target.append(document.getElementById(data));
-      const changeStartOrEnd = event.target.parentNode.id.split(" ");
-      
-      console.log(data, changeStartOrEnd)
-      if (data === "end") {
-        end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
-      } else {
-        start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
-      }
-    };
-  
-    onDragOver = event => {
-      event.preventDefault();
-    };
+    const changedGrid = makeNodeToWall(this.state.grid, i, j);
+    this.setState({
+      grid: changedGrid
+    });
+  };
 
-    render() {
-      return (
-        <StyledAStar>
+  onMouseUp = () => {
+    this.setState({
+      mouseIsPressed: false
+    });
+  };
+
+  onDrop = event => {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("transfer");
+    event.target.append(document.getElementById(data));
+    const changeStartOrEnd = event.target.parentNode.id.split(" ");
+
+    console.log(data, changeStartOrEnd);
+    if (data === "end") {
+      end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
+    } else {
+      start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
+    }
+  };
+
+  onDragOver = event => {
+    event.preventDefault();
+  };
+
+  render() {
+    return (
+      <StyledAStar>
         {/* grid */}
         {this.state.grid ? (
           <table className="table-hover table-striped table-bordered">
@@ -235,12 +213,12 @@ export default class AStar extends React.Component {
                 let entry = item.map((element, j) => {
                   return (
                     <Node
-                    key={j}
-                    i={element.i}
-                    j={element.j}
-                    start={element.start}
-                    end={element.end}
-                    wall={element.wall}
+                      key={j}
+                      i={element.i}
+                      j={element.j}
+                      start={element.start}
+                      end={element.end}
+                      wall={element.wall}
                       backgroundColor={element.backgroundColor}
                       onMouseDown={() => this.onMouseDown(i, j)}
                       onMouseEnter={() => this.onMouseEnter(i, j)}
@@ -384,21 +362,3 @@ const heuristic = (a, b) => {
   let d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
   return d;
 };
-
-// FEATURES :
-
-// ADD DIAGONAL NEIGHBORS
-
-// BUG LIST :
-
-// fix restart bug: ADD ALL global variables to component state
-// also constructor function Spot
-// refactor method calls where global vars get changed to setState
-
-// fix bug for start and end in Spot constructor
-
-// Check bug in drop method where you set the end and start
-
-// Change the start and end letter to icon
-
-// start with the legend
