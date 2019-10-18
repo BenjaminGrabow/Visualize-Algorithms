@@ -174,22 +174,22 @@ export default class AStar extends React.Component {
     this.componentDidMount();
   };
 
-  // drop = event => {
-  //   event.preventDefault();
-  //   const data = event.dataTransfer.getData("transfer");
-  //   event.target.append(document.getElementById(data));
-  //   const changeStartOrEnd = event.target.parentNode.id.split(" ");
+  onDrop = event => {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("transfer");
+    event.target.append(document.getElementById(data));
+    const changeStartOrEnd = event.target.parentNode.id.split(" ");
 
-  //   if (data === "end") {
-  //     end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
-  //   } else {
-  //     start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
-  //   }
-  // };
+    if (data === "end") {
+      end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
+    } else {
+      start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
+    }
+  };
 
-  // allowDrop = event => {
-  //   event.preventDefault();
-  // };
+  onDragOver = event => {
+    event.preventDefault();
+  };
 
   onMouseDown = (i, j) => {
     // check if node is not start and end
@@ -234,7 +234,8 @@ export default class AStar extends React.Component {
                   return (
                     <Node
                       key={j}
-                      id={`${element.i} ${element.j}`}
+                      i={element.i}
+                      j={element.j}
                       start={element.start}
                       end={element.end}
                       wall={element.wall}
@@ -242,6 +243,8 @@ export default class AStar extends React.Component {
                       onMouseDown={() => this.onMouseDown(i, j)}
                       onMouseEnter={() => this.onMouseEnter(i, j)}
                       onMouseUp={this.onMouseUp}
+                      onDragOver={this.onDragOver}
+                      onDrop={this.onDrop}
                     />
                   );
                 });

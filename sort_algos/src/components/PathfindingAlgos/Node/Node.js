@@ -1,16 +1,20 @@
 import React from "react";
+import Draggable from "../DragDrop/Draggable";
 
 class Node extends React.Component {
   render() {
     const {
+      i,
+      j,
       start,
       end,
-      id,
       wall,
       backgroundColor,
       onMouseDown,
       onMouseEnter,
       onMouseUp,
+      onDragOver,
+      onDrop
     } = this.props;
 
     return (
@@ -22,21 +26,73 @@ class Node extends React.Component {
           backgroundColor: `${wall ? "black" : backgroundColor}`
         }}
         className="node"
-        id={id}
+        id={`${i} ${j}`}
       >
         {start ? (
-          <i
-            id="start1"
-            style={{ margin: "0", padding: "0" }}
-            className="fa fa-play-circle dragDrop"
-          />
+
+          <div
+            id="dr1"
+            className="dragDrop"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "1rem",
+              height: "1rem"
+            }}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
+          >
+            <Draggable id="start" className="dragDrop">
+              <i
+                id="start1"
+                style={{ margin: "0", padding: "0" }}
+                className="fa fa-play-circle dragDrop"
+              />
+            </Draggable>
+          </div>
+
         ) : end ? (
-          <i
-            id="end1"
-            style={{ margin: "0", padding: "0" }}
-            className="fa fa-bullseye dragDrop"
+
+          <div
+            id="dr2"
+            className="dragDrop"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "1rem",
+              height: "1rem"
+            }}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
+          >
+            <Draggable className="dragDrop" id="end">
+              <i
+                id="end1"
+                style={{ margin: "0", padding: "0" }}
+                className="fa fa-bullseye dragDrop"
+              />
+            </Draggable>
+          </div>
+
+        ) : (
+
+          <div
+            id={`${i}${j}`}
+            className="dragDrop"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "1rem",
+              height: "1rem"
+            }}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
           />
-        ) : null}
+
+        )}
       </td>
     );
   }
