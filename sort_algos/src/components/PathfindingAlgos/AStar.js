@@ -192,6 +192,7 @@ export default class AStar extends React.Component {
   // };
 
   onMouseDown = (i, j) => {
+    // check if node is not start and end
     if (!this.state.grid[i][j].start && !this.state.grid[i][j].end) {
       const changedGrid = makeNodeToWall(this.state.grid, i, j);
       this.setState({
@@ -202,6 +203,7 @@ export default class AStar extends React.Component {
   };
 
   onMouseEnter = (i, j) => {
+    // check if mouse is pressed / start or end
     if (
       !this.state.mouseIsPressed ||
       this.state.grid[i][j].start ||
