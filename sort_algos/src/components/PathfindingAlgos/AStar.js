@@ -38,15 +38,15 @@ export default class AStar extends React.Component {
     end.wall = false;
 
     // openSet starts with beginning only
-    openSet.push(start);
-
+    
     this.setState({
       grid: grid
     });
     console.log(grid);
   };
-
+  
   start = () => {
+    openSet.push(start);
     // Am I still searching?
     if (openSet.length > 0) {
       // Best next option
@@ -174,23 +174,7 @@ export default class AStar extends React.Component {
     this.componentDidMount();
   };
 
-  onDrop = event => {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("transfer");
-    event.target.append(document.getElementById(data));
-    const changeStartOrEnd = event.target.parentNode.id.split(" ");
-
-    if (data === "end") {
-      end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
-    } else {
-      start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
-    }
-  };
-
-  onDragOver = event => {
-    event.preventDefault();
-  };
-
+  
   onMouseDown = (i, j) => {
     // check if node is not start and end
     if (!this.state.grid[i][j].start && !this.state.grid[i][j].end) {
@@ -201,30 +185,48 @@ export default class AStar extends React.Component {
       });
     }
   };
-
+  
   onMouseEnter = (i, j) => {
     // check if mouse is pressed / start or end
     if (
       !this.state.mouseIsPressed ||
       this.state.grid[i][j].start ||
       this.state.grid[i][j].end
-    )
+      )
       return;
-    const changedGrid = makeNodeToWall(this.state.grid, i, j);
-    this.setState({
-      grid: changedGrid
-    });
-  };
+      const changedGrid = makeNodeToWall(this.state.grid, i, j);
+      this.setState({
+        grid: changedGrid
+      });
+    };
+    
+    onMouseUp = () => {
+      this.setState({
+        mouseIsPressed: false
+      });
+    };
+    
+    onDrop = event => {
+      event.preventDefault();
+      const data = event.dataTransfer.getData("transfer");
+      event.target.append(document.getElementById(data));
+      const changeStartOrEnd = event.target.parentNode.id.split(" ");
+      
+      console.log(data, changeStartOrEnd)
+      if (data === "end") {
+        end = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
+      } else {
+        start = this.state.grid[changeStartOrEnd[0]][changeStartOrEnd[1]];
+      }
+    };
+  
+    onDragOver = event => {
+      event.preventDefault();
+    };
 
-  onMouseUp = () => {
-    this.setState({
-      mouseIsPressed: false
-    });
-  };
-
-  render() {
-    return (
-      <StyledAStar>
+    render() {
+      return (
+        <StyledAStar>
         {/* grid */}
         {this.state.grid ? (
           <table className="table-hover table-striped table-bordered">
@@ -233,12 +235,12 @@ export default class AStar extends React.Component {
                 let entry = item.map((element, j) => {
                   return (
                     <Node
-                      key={j}
-                      i={element.i}
-                      j={element.j}
-                      start={element.start}
-                      end={element.end}
-                      wall={element.wall}
+                    key={j}
+                    i={element.i}
+                    j={element.j}
+                    start={element.start}
+                    end={element.end}
+                    wall={element.wall}
                       backgroundColor={element.backgroundColor}
                       onMouseDown={() => this.onMouseDown(i, j)}
                       onMouseEnter={() => this.onMouseEnter(i, j)}
